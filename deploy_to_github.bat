@@ -6,8 +6,8 @@ echo.
 
 echo Step 1: Please create GitHub repository first
 echo - Go to: https://github.com/new
-echo - Repository name: luther-algorithm
-echo - Description: The most powerful hybrid post-quantum cryptosystem ever created
+echo - Repository name: luthers-algorithm-framework
+echo - Description: Enhanced NIST-approved post-quantum cryptography framework with advanced features
 echo - UNCHECK "Add a README file"
 echo - Click "Create repository"
 echo.
@@ -19,7 +19,7 @@ set /p username="GitHub Username: "
 
 echo.
 echo Connecting to GitHub repository...
-git remote add origin https://github.com/%username%/luther-algorithm.git
+git remote add origin https://github.com/%username%/luthers-algorithm-framework.git
 
 echo.
 echo Setting main branch...

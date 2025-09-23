@@ -3,14 +3,14 @@
 Basic usage example for Luther's Golden Algorithm
 """
 
-from luther_algorithm import LuthersGoldenAlgorithm
+from luther_algorithm import LuthersAlgorithm
 
 def main():
     print("Luther's Golden Algorithm - Basic Usage Demo")
     print("=" * 50)
 
     # Initialize the golden algorithm
-    golden = LuthersGoldenAlgorithm()
+    golden = LuthersAlgorithm()
 
     # Example 1: Basic encryption/decryption
     print("\n1. Basic Encryption/Decryption:")

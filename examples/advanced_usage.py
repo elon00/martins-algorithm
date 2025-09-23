@@ -6,7 +6,7 @@ Demonstrates performance benchmarking and large-scale operations
 
 import time
 import os
-from luther_algorithm import LuthersGoldenAlgorithm
+from luther_algorithm import LuthersAlgorithm
 
 def benchmark_performance():
     """Benchmark encryption/decryption performance"""
@@ -37,34 +37,81 @@ def benchmark_performance():
               ".1f")
 
 def demonstrate_security_features():
-    """Demonstrate various security features"""
-    print("\nSecurity Features Demonstration")
-    print("=" * 40)
+    """Demonstrate various advanced security features"""
+    print("\nAdvanced Security Features Demonstration")
+    print("=" * 50)
 
     golden = LuthersGoldenAlgorithm()
 
-    # 1. Adaptive encryption based on data size
-    print("1. Adaptive Encryption:")
+    # 1. AI-driven adaptive encryption
+    print("1. AI-Driven Adaptive Encryption:")
     small_data = b"Small message"
     large_data = b"A" * 500000  # 500KB
 
-    enc_small = golden.encrypt(small_data)
-    enc_large = golden.encrypt(large_data)
+    enc_small = golden.encrypt(small_data, adaptive=True)
+    enc_large = golden.encrypt(large_data, adaptive=True)
 
     print(f"   Small data ({len(small_data)} bytes) -> {len(enc_small)} bytes")
     print(f"   Large data ({len(large_data)} bytes) -> {len(enc_large)} bytes")
+    print(f"   AI selected mode for large data: {golden.performance_metrics.get('last_encryption_mode', 'unknown')}")
 
-    # 2. Digital signatures
-    print("\n2. Post-Quantum Digital Signatures:")
+    # 2. Multi-algorithm digital signatures
+    print("\n2. Multi-Algorithm Post-Quantum Signatures:")
     message = b"Critical security message"
-    signature = golden.sign(message)
-    verified = golden.verify(message, signature)
 
-    print(f"   Message signed: {len(signature)} bytes")
-    print(f"   Signature verified: {verified}")
+    # Single algorithm signature
+    signature = golden.sign(message, 'dilithium')
+    verified = golden.verify(message, signature, 'dilithium')
+    print(f"   Dilithium signature: {len(signature)} bytes, verified: {verified}")
 
-    # 3. Tamper detection
-    print("\n3. Tamper Detection:")
+    # Multi-algorithm signatures
+    try:
+        signatures = golden.sign_multiple(message, ['dilithium'])
+        verification = golden.verify_multiple(message, signatures)
+        print(f"   Multi-algorithm signatures: {list(signatures.keys())}")
+        print(f"   All verified: {all(verification.values())}")
+    except Exception as e:
+        print(f"   Multi-algorithm demo skipped: {e}")
+
+    # 3. Homomorphic encryption
+    print("\n3. Homomorphic Encryption (Privacy-Preserving Computation):")
+    try:
+        data1 = [1.5, 2.3, 3.1]
+        data2 = [0.5, 1.7, 2.9]
+
+        enc1 = golden.homomorphic_encrypt(data1)
+        enc2 = golden.homomorphic_encrypt(data2)
+        enc_sum = golden.homomorphic_compute(enc1, enc2, 'add')
+        result = golden.homomorphic_decrypt(enc_sum)
+
+        expected = [a + b for a, b in zip(data1, data2)]
+        print(f"   Homomorphic addition successful: {result == expected}")
+        print(f"   Result: {result}")
+    except Exception as e:
+        print(f"   Homomorphic encryption demo skipped: {e}")
+
+    # 4. Quantum key distribution
+    print("\n4. Quantum Key Distribution (QKD) Concepts:")
+    try:
+        qkd_key = golden.quantum_key_distribution(256)
+        print(f"   QKD key generated: {len(qkd_key)} bytes")
+    except Exception as e:
+        print(f"   QKD demo skipped: {e}")
+
+    # 5. Threshold cryptography
+    print("\n5. Threshold Cryptography:")
+    try:
+        secret = b"Super secret distributed key"
+        shares = golden.threshold_cryptography(shares=5, threshold=3, secret=secret)
+        reconstructed = golden.threshold_cryptography(shares[:3])  # Need 3 shares
+        success = reconstructed == secret
+        print(f"   Threshold crypto successful: {success}")
+        print(f"   Secret reconstructed from 3/5 shares")
+    except Exception as e:
+        print(f"   Threshold crypto demo skipped: {e}")
+
+    # 6. Tamper detection
+    print("\n6. Tamper Detection:")
     original = b"Original message"
     encrypted = golden.encrypt(original)
 
@@ -84,7 +131,7 @@ def file_encryption_demo():
     print("\nFile Encryption Demonstration")
     print("=" * 35)
 
-    golden = LuthersGoldenAlgorithm()
+    golden = LuthersAlgorithm()
 
     # Create a sample file
     sample_content = b"This is a sample file content for encryption demonstration.\n" * 100

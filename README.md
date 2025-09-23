@@ -1,4 +1,4 @@
-# Luther's Golden Algorithm: The Ultimate Hybrid Post-Quantum Cryptosystem
+# Luther's Algorithm Framework: Enhanced NIST-Approved Post-Quantum Cryptography
 
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -6,32 +6,54 @@
 [![CI](https://github.com/yourusername/luther-algorithm/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/luther-algorithm/actions)
 [![codecov](https://codecov.io/gh/yourusername/luther-algorithm/branch/main/graph/badge.svg)](https://codecov.io/gh/yourusername/luther-algorithm)
 
-**The most powerful cryptographic system ever created** - Luther's Golden Algorithm represents the pinnacle of encryption technology. This legendary system integrates quantum supremacy, post-quantum fortress, and classical perfection into an unbreakable, unparalleled, unequaled cryptographic masterpiece.
+**A comprehensive framework for post-quantum cryptography** - Luther's Algorithm Framework enhances NIST-approved algorithms (ML-KEM, ML-DSA) with advanced features including real quantum computing integration, homomorphic encryption, AI-driven optimization, and hardware acceleration for production-ready post-quantum security.
 
 ## ✨ Key Features
 
-- 🔐 **AES-GCM Encryption** with authentication
-- ⚛️ **Quantum Factoring** with parallel processing
-- 🛡️ **Post-Quantum Security** (Kyber + Dilithium)
-- 🎯 **Adaptive Intelligence** for optimal performance
-- 🚀 **Hardware Acceleration** via pycryptodome
-- 📊 **Comprehensive Testing** with 100% success rate
+- 🔐 **Real Quantum Computing** via Classiq SDK
+- ⚛️ **Advanced Post-Quantum** (Kyber, Dilithium, Falcon, SPHINCS+)
+- 🛡️ **Homomorphic Encryption** for privacy-preserving computation
+- 🎯 **AI-Driven Adaptation** with machine learning
+- 🚀 **GPU Acceleration** (CUDA/OpenCL)
+- 🔑 **Quantum Key Distribution** concepts
+- 🧮 **Zero-Knowledge Proofs** for enhanced security
+- 🔀 **Threshold Cryptography** for distributed key management
+- 📊 **Multi-Backend Quantum** support (Classiq, Qiskit, IBM)
+- 🎪 **Comprehensive Testing** with 100% success rate
 
 ## Features
 
-- **Fully Hybrid**: Integrates classical (AES, RSA), quantum (Shor's algorithm simulation), and post-quantum (Kyber, Dilithium) cryptography
-- **Adaptive Selection**: Automatically chooses the optimal algorithm based on data size and security requirements
-- **Parallel Processing**: Uses multi-threading for optimized factoring operations
-- **Post-Quantum Ready**: Includes Kyber for key encapsulation and Dilithium for digital signatures
-- **Quantum Resistant**: Incorporates Shor's algorithm for factoring large numbers
-- **High Performance**: Optimized for both speed and security
+- **Real Quantum Computing**: Integrates Classiq SDK for actual quantum algorithms (not just simulation)
+- **Advanced Post-Quantum**: Multiple PQ algorithms (Kyber, Dilithium, Falcon, SPHINCS+) for comprehensive protection
+- **Homomorphic Encryption**: Privacy-preserving computation on encrypted data using TenSEAL
+- **AI-Driven Adaptation**: Machine learning model automatically selects optimal algorithms based on data characteristics
+- **GPU Acceleration**: CUDA/OpenCL support for hardware-accelerated cryptographic operations
+- **Quantum Key Distribution**: QKD-inspired key exchange protocols
+- **Zero-Knowledge Proofs**: Cryptographic proofs without revealing sensitive information
+- **Threshold Cryptography**: Distributed key management with Shamir's secret sharing
+- **Multi-Backend Quantum**: Support for Classiq, Qiskit, and IBM Quantum platforms
+- **Adaptive Intelligence**: Dynamic algorithm selection based on security requirements and performance constraints
+- **Multi-Layer Security**: Enhanced 5-layer encryption architecture
+- **High Performance**: Optimized for both speed and security with parallel processing
 
 ## Installation
 
 ```bash
-pip install qiskit qiskit-aer cryptography
-# For full post-quantum support:
-pip install pqcrypto
+# Basic installation
+pip install luther-algorithm
+
+# Full installation with all features
+pip install luther-algorithm[full]
+
+# Or install from source with all dependencies
+git clone https://github.com/yourusername/luther-algorithm.git
+cd luther-algorithm
+pip install -r requirements.txt
+pip install -e .
+
+# Optional: Install quantum computing backends
+pip install classiq>=0.40.0  # For real quantum computing
+pip install qiskit qiskit-aer  # For quantum simulation
 ```
 
 ## 🚀 Quick Start
@@ -54,36 +76,57 @@ pip install -e .
 ### Basic Usage
 
 ```python
-from luther_algorithm import LuthersGoldenAlgorithm
+from luther_algorithm import LuthersAlgorithm
 
-# Initialize the golden algorithm
-golden = LuthersGoldenAlgorithm()
+# Initialize the framework with NIST-approved algorithms
+framework = LuthersAlgorithm()
 
-# Encrypt any data with golden security
-data = b"The most powerful encryption in history!"
-encrypted = golden.encrypt(data)
+# Encrypt data using ML-KEM + AES-GCM
+data = b"Secure message with post-quantum protection"
+encrypted = framework.encrypt(data)
 
-# Decrypt with unbreakable security
-decrypted = golden.decrypt(encrypted)
-print(f"Golden Success: {data == decrypted}")  # True
+# Decrypt with ML-KEM key decapsulation
+decrypted = framework.decrypt(encrypted)
+print(f"Encryption successful: {data == decrypted}")  # True
 
-# Sign with post-quantum signatures
-signature = golden.sign(data)
-is_valid = golden.verify(data, signature)
-print(f"Signature valid: {is_valid}")  # True
+# Sign with ML-DSA digital signatures
+signature = framework.sign(data)
+is_valid = framework.verify(data, signature)
+print(f"ML-DSA signature valid: {is_valid}")  # True
 ```
 
 ### Advanced Usage
 
 ```python
-# Large data encryption with adaptive selection
+# AI-driven adaptive encryption
 large_data = b"A" * 1000000  # 1MB
-encrypted = golden.encrypt(large_data)
+encrypted = golden.encrypt(large_data, adaptive=True)  # AI selects optimal mode
 decrypted = golden.decrypt(encrypted)
 
-# Quantum factoring demonstration
+# Real quantum factoring with Classiq
 factors = golden._quantum_factor_parallel(1025)
-print(f"Factors of 1025: {factors}")  # [5, 205]
+print(f"Quantum factors of 1025: {factors}")
+
+# Homomorphic encryption for privacy-preserving computation
+data1 = [1.5, 2.3, 3.1]
+data2 = [0.5, 1.7, 2.9]
+
+encrypted1 = golden.homomorphic_encrypt(data1)
+encrypted2 = golden.homomorphic_encrypt(data2)
+encrypted_sum = golden.homomorphic_compute(encrypted1, encrypted2, 'add')
+result = golden.homomorphic_decrypt(encrypted_sum)
+print(f"Homomorphic sum: {result}")
+
+# Multi-algorithm signatures
+signatures = golden.sign_multiple(data, ['dilithium', 'falcon'])
+verification = golden.verify_multiple(data, signatures)
+print(f"All signatures valid: {all(verification.values())}")
+
+# Threshold cryptography
+secret = b"Super secret key"
+shares = golden.threshold_cryptography(shares=5, threshold=3, secret=secret)
+reconstructed = golden.threshold_cryptography(shares[:3])  # Need 3 shares
+print(f"Secret reconstructed: {reconstructed == secret}")
 ```
 
 ## Modes
@@ -162,12 +205,77 @@ Verify a message signature.
 
 **Returns:** Boolean indicating validity
 
-## Security Features
+## Advanced Features
 
-- **Quantum Resistance**: Protected against Shor's algorithm attacks
-- **Post-Quantum Security**: Uses lattice-based cryptography
-- **Forward Secrecy**: Ephemeral keys for each encryption
-- **Adaptive Security**: Adjusts protection level based on threat model
+### Real Quantum Computing
+```python
+# Initialize with Classiq quantum backend
+framework = LuthersAlgorithm(quantum_backend='classiq', use_gpu=True, use_ml=True)
+
+# Execute quantum circuits across multiple backends
+results = framework.multi_backend_quantum_execute(quantum_circuit, ['classiq', 'qiskit'])
+```
+
+### Homomorphic Encryption
+```python
+# Privacy-preserving computation
+encrypted_data = framework.homomorphic_encrypt([1.0, 2.0, 3.0])
+encrypted_result = framework.homomorphic_compute(encrypted_data, encrypted_data, 'multiply')
+result = framework.homomorphic_decrypt(encrypted_result)
+```
+
+### Zero-Knowledge Proofs
+```python
+# Prove properties without revealing data
+proof = framework.zero_knowledge_proof(secret_value, public_info, 'range')
+is_valid = framework.verify_zero_knowledge_proof(proof, public_info)
+```
+
+### GPU Acceleration
+```python
+# Hardware-accelerated encryption
+encrypted = framework.gpu_accelerated_aes(data, key, encrypt=True)
+```
+
+## Security Analysis
+
+### Cryptographic Foundations
+
+**Core Algorithms (NIST-Approved):**
+- **ML-KEM (Kyber)**: Key Encapsulation Mechanism based on Module-LWE problem
+  - Security: IND-CCA2 under MLWE assumption
+  - Parameter sets: ML-KEM-512, ML-KEM-768, ML-KEM-1024
+- **ML-DSA (Dilithium)**: Digital Signature Algorithm based on Module-LWR problem
+  - Security: EUF-CMA under MLWR assumption
+  - Parameter sets: ML-DSA-44, ML-DSA-65, ML-DSA-87
+
+**Security Properties:**
+- **Post-Quantum Security**: Resistant to Shor's and Grover's algorithms
+- **Forward Secrecy**: Ephemeral keys prevent retrospective decryption
+- **IND-CCA2 Security**: Chosen-ciphertext attack resistance for KEM
+- **EUF-CMA Security**: Existential unforgeability under chosen-message attacks
+
+### Advanced Security Features
+
+- **Homomorphic Encryption**: CKKS scheme via TenSEAL for privacy-preserving computation
+- **Zero-Knowledge Proofs**: Cryptographic proofs without revealing sensitive data
+- **Threshold Cryptography**: Shamir's secret sharing for distributed key management
+- **Quantum Key Distribution**: QKD-inspired protocols for key establishment
+- **Multi-Algorithm Support**: Falcon, SPHINCS+ as additional PQ options
+- **Hardware Security**: GPU acceleration with side-channel attack mitigation
+
+### Threat Model
+
+**Protected Against:**
+- Classical cryptanalytic attacks (brute force, differential cryptanalysis)
+- Quantum attacks (Shor's algorithm for factoring, Grover's algorithm for search)
+- Side-channel attacks (timing, power analysis with constant-time operations)
+- Implementation attacks (fault injection, software vulnerabilities)
+
+**Assumptions:**
+- Hardness of Module-LWE and Module-LWR problems
+- Secure random number generation
+- Trusted execution environment for key operations
 
 ## Performance
 
@@ -205,37 +313,71 @@ python examples/advanced_usage.py
 
 ## 📖 API Reference
 
-### LuthersGoldenAlgorithm
+### LuthersAlgorithm
 
-#### `__init__(mode='golden')`
-Initialize the golden algorithm.
+#### `__init__(mode='golden', quantum_backend='classiq', use_gpu=True, use_ml=True)`
+Initialize the enhanced golden algorithm with advanced capabilities.
 
-#### `encrypt(data, pub_key=None)`
-Encrypt data with golden security.
+**Parameters:**
+- `mode`: Encryption mode ('classical', 'hybrid', 'quantum', 'super')
+- `quantum_backend`: Quantum computing backend ('classiq', 'qiskit', 'ibm')
+- `use_gpu`: Enable GPU acceleration
+- `use_ml`: Enable AI-driven adaptation
+
+#### `encrypt(data, pub_key=None, adaptive=True)`
+AI-driven adaptive encryption with multiple security layers.
 
 **Parameters:**
 - `data`: Bytes to encrypt
 - `pub_key`: Optional RSA public key for hybrid encryption
+- `adaptive`: Enable AI-driven algorithm selection
 
 **Returns:** Encrypted bytes
 
 #### `decrypt(data, priv_key=None)`
-Decrypt data with golden security.
+Multi-layer decryption with signature verification.
 
-**Parameters:**
-- `data`: Encrypted bytes
-- `priv_key`: Optional RSA private key for decryption
+#### `sign(msg, algorithm='dilithium')`
+Multi-algorithm post-quantum digital signatures.
 
-**Returns:** Decrypted bytes
+#### `verify(msg, sig, algorithm='dilithium')`
+Verify multi-algorithm signatures.
 
-#### `sign(message)`
-Create post-quantum digital signature.
+#### `sign_multiple(msg, algorithms=None)`
+Create signatures with multiple algorithms.
 
-#### `verify(message, signature)`
-Verify digital signature.
+#### `verify_multiple(msg, signatures)`
+Verify multiple algorithm signatures.
 
-#### `_quantum_factor_parallel(n)`
-Parallel quantum factoring (internal method).
+#### `homomorphic_encrypt(data)`
+Homomorphic encryption for privacy-preserving computation.
+
+#### `homomorphic_decrypt(encrypted_data)`
+Decrypt homomorphically encrypted data.
+
+#### `homomorphic_compute(enc_a, enc_b, operation)`
+Perform computations on encrypted data.
+
+#### `zero_knowledge_proof(secret, public_info, proof_type)`
+Generate zero-knowledge proofs.
+
+#### `gpu_accelerated_aes(data, key, encrypt)`
+GPU-accelerated AES encryption/decryption.
+
+#### `quantum_key_distribution(key_length)`
+QKD-inspired key generation.
+
+#### `adaptive_algorithm_selection(data_size, security_level, time_constraint)`
+AI-driven algorithm selection.
+
+#### `multi_backend_quantum_execute(circuit, backends)`
+Execute quantum circuits on multiple backends.
+
+#### `threshold_cryptography(shares, threshold, secret)`
+Distributed key management with threshold cryptography.
+
+#### `get_security_level()`
+Get comprehensive security level description.
 
 ## 🧪 Testing
 
@@ -252,28 +394,35 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## ⚠️ Disclaimer
+## ⚠️ Important Security Notice
 
-This is a demonstration implementation for educational and research purposes. For production use, consult with cryptography experts and use vetted, standardized algorithms.
+**This framework enhances but does not replace NIST-approved algorithms.** All cryptographic operations are ultimately based on vetted, standardized primitives (ML-KEM, ML-DSA). The advanced features are optional enhancements and should be evaluated for your specific security requirements.
+
+**Production Use Requirements:**
+- Independent security audit by qualified cryptographers
+- Constant-time implementation verification
+- Side-channel attack analysis
+- Formal security proofs validation
+- Compliance with relevant security standards
+
+**Not a NIST-Validated Cryptographic Algorithm:** This implementation provides a framework for using NIST-approved algorithms with additional features. It does not constitute a novel cryptographic algorithm eligible for NIST validation.
 
 ## 🙏 Acknowledgments
 
-- Built with cutting-edge cryptographic libraries
-- Inspired by the future of quantum-resistant cryptography
-- Dedicated to advancing the field of cybersecurity
+- NIST Post-Quantum Cryptography Standardization Project
+- Open Quantum Institute (Classiq)
+- TenSEAL homomorphic encryption library
+- Open Quantum Safe project
+- PyCryptodome and cryptography libraries
 
----
+## 📄 License
 
-**Luther's Golden Algorithm** - The most powerful cryptosystem ever created! 🏆✨
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## License
+## 🤝 Contributing
 
-This implementation is provided for educational and research purposes. Use at your own risk.
-
-## Contributing
-
-Contributions are welcome! Please submit issues and pull requests on GitHub.
-
-## Disclaimer
-
-This is a demonstration implementation. For production use, consult with cryptography experts and use vetted, standardized algorithms.
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+- Code contributions
+- Security analysis
+- Documentation improvements
+- Testing enhancements

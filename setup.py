@@ -38,9 +38,17 @@ setup(
     install_requires=[
         "qiskit>=1.0.0",
         "qiskit-aer>=0.12.0",
+        "classiq>=0.40.0",  # Real quantum computing platform
         "pycryptodome>=3.18.0",
         "cryptography>=41.0.0",
         "numpy>=1.21.0",
+        "scipy>=1.7.0",
+        "pqcrypto>=0.1.0",  # Post-quantum features
+        "liboqs-python>=0.8.0",  # Additional PQ algorithms
+        "tenseal>=0.3.0",  # Homomorphic encryption
+        "zksk>=1.0.0",  # Zero-knowledge proofs
+        "torch>=1.9.0",  # ML/AI enhancements
+        "scikit-learn>=1.0.0",  # Adaptive selection ML
     ],
     extras_require={
         "postquantum": ["pqcrypto>=0.1.0"],
