@@ -1,7 +1,0 @@
-include README.md
-include LICENSE
-include requirements.txt
-include CONTRIBUTING.md
-recursive-include examples *.py
-global-exclude *.pyc
-global-exclude __pycache__

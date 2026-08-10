@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martin's Algorithm — Crypto Asset Recovery Dashboard</title>
+  <meta name="description" content="Martin's Algorithm: AI-powered crypto asset recovery and opportunity detection engine. Discover dormant, migrated, and recoverable crypto assets." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ───────────────────── HEADER ───────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">M</div>
+        <div>
+          <span class="logo-title">Martin's Algorithm</span>
+          <span class="logo-sub">Crypto Asset Recovery Engine v1.0</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" onclick="showSection('dashboard')" id="btn-dashboard">Dashboard</button>
+        <button class="nav-btn" onclick="showSection('scanner')" id="btn-scanner">Live Scanner</button>
+        <button class="nav-btn" onclick="showSection('optimizer')" id="btn-optimizer">Optimizer</button>
+        <button class="nav-btn" onclick="showSection('policy')" id="btn-policy">Policy Engine</button>
+      </nav>
+      <div class="api-status" id="api-status">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text">Connecting...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ───────────────────── HERO ───────────────────── -->
+  <section class="hero" id="section-dashboard">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-badge">🧠 Martin Score Engine Active</div>
+      <h1 class="hero-title">
+        Discover <span class="gradient-text">Lost &amp; Recoverable</span><br/>
+        Crypto Assets
+      </h1>
+      <p class="hero-sub">
+        Martin's Algorithm scans 5,000+ cryptocurrencies from CoinMarketCap,<br/>
+        scores them using a rigorous mathematical formula, and surfaces legitimate<br/>
+        <strong>recovery opportunities</strong> — all with a fail-closed permission engine.
+      </p>
+
+      <!-- Stats bar -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <span class="stat-value" id="stat-scanned">—</span>
+          <span class="stat-label">Coins Analyzed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-recoverable">—</span>
+          <span class="stat-label">Recoverable Found</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-dormant">—</span>
+          <span class="stat-label">Dormant Assets</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-score">—</span>
+          <span class="stat-label">Avg Martin Score</span>
+        </div>
+      </div>
+
+      <!-- Formula card -->
+      <div class="formula-card">
+        <div class="formula-title">Martin Score Formula</div>
+        <div class="formula-body">
+          <span class="formula-text">M<sub>i</sub> = α·S<sub>i</sub> + β·P<sub>rec</sub>(i) + γ·C<sub>i</sub> − δ·Risk<sub>i</sub></span>
+        </div>
+        <div class="formula-params">
+          <span>α = 0.60</span><span>β = 0.25</span><span>γ = 0.15</span><span>δ = 0.50</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── SCORE TOOL ───────────────────── -->
+  <section class="section" id="section-score-tool">
+    <div class="container">
+      <h2 class="section-title">Score an Asset</h2>
+      <p class="section-sub">Enter feature values to compute the Martin Score in real-time.</p>
+
+      <div class="score-grid">
+        <div class="score-inputs">
+          <div class="input-group">
+            <label>Asset ID</label>
+            <input type="text" id="inp-asset-id" placeholder="e.g. cmc:1234:TOKEN" value="demo:test:TKN" />
+          </div>
+          <div class="slider-grid">
+            <div class="slider-item" id="sl-market_activity">
+              <label>Market Activity <span class="slider-val">0.50</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateSlider(this,'market_activity')" />
+            </div>
+            <div class="slider-item" id="sl-liquidity">
+              <label>Liquidity <span class="slider-val">0.50</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateSlider(this,'liquidity')" />
+            </div>
+            <div class="slider-item" id="sl-onchain_activity">
+              <label>On-chain Activity <span class="slider-val">0.50</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateSlider(this,'onchain_activity')" />
+            </div>
+            <div class="slider-item" id="sl-developer_activity">
+              <label>Developer Activity <span class="slider-val">0.50</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateSlider(this,'developer_activity')" />
+            </div>
+            <div class="slider-item" id="sl-recovery_evidence">
+              <label>Recovery Evidence <span class="slider-val">0.50</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateSlider(this,'recovery_evidence')" />
+            </div>
+            <div class="slider-item" id="sl-ownership_evidence">
+              <label>Ownership Evidence <span class="slider-val">0.50</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateSlider(this,'ownership_evidence')" />
+            </div>
+            <div class="slider-item" id="sl-risk">
+              <label>Risk <span class="slider-val">0.20</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.2" oninput="updateSlider(this,'risk')" />
+            </div>
+            <div class="slider-item" id="sl-confidence">
+              <label>Confidence <span class="slider-val">0.80</span></label>
+              <input type="range" min="0" max="1" step="0.01" value="0.8" oninput="updateSlider(this,'confidence')" />
+            </div>
+          </div>
+          <button class="btn-primary" onclick="scoreAsset()" id="btn-score">Compute Score</button>
+        </div>
+
+        <div class="score-result" id="score-result">
+          <div class="result-empty">
+            <div class="result-empty-icon">📊</div>
+            <p>Adjust sliders and click "Compute Score"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── LIVE SCANNER ───────────────────── -->
+  <section class="section hidden" id="section-scanner">
+    <div class="container">
+      <h2 class="section-title">Live CMC Scanner</h2>
+      <p class="section-sub">Scan CoinMarketCap for dormant and recoverable assets. Requires CMC_API_KEY.</p>
+      <div class="scan-controls">
+        <div class="input-row">
+          <div class="input-group small">
+            <label>Pages to scan</label>
+            <input type="number" id="scan-pages" value="2" min="1" max="50" />
+          </div>
+          <div class="input-group small">
+            <label>Per page</label>
+            <input type="number" id="scan-page-size" value="100" min="10" max="200" />
+          </div>
+          <div class="input-group small">
+            <label>Top opportunities</label>
+            <input type="number" id="scan-top-k" value="20" min="1" max="200" />
+          </div>
+        </div>
+        <button class="btn-primary" onclick="runScan()" id="btn-scan">
+          <span id="scan-btn-text">▶ Start Scan</span>
+        </button>
+      </div>
+      <div id="scan-results" class="opportunity-list"></div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── OPTIMIZER ───────────────────── -->
+  <section class="section hidden" id="section-optimizer">
+    <div class="container">
+      <h2 class="section-title">QUBO Optimizer</h2>
+      <p class="section-sub">Select the optimal K assets from a portfolio using the classical QUBO solver.</p>
+      <div class="optimizer-grid">
+        <div class="optimizer-input">
+          <label>Asset list (JSON)</label>
+          <textarea id="opt-assets" rows="10" placeholder='[{"asset_id":"BTC","features":{"recovery_evidence":0.1},"risk":0.2,"confidence":0.9},{"asset_id":"TOKEN_A","features":{"recovery_evidence":0.8},"risk":0.1,"confidence":0.7}]'></textarea>
+          <div class="input-row">
+            <div class="input-group small">
+              <label>Select K assets</label>
+              <input type="number" id="opt-k" value="1" min="1" />
+            </div>
+            <div class="input-group small">
+              <label>Penalty λ</label>
+              <input type="number" id="opt-penalty" value="2.0" step="0.1" min="0.1" />
+            </div>
+          </div>
+          <button class="btn-primary" onclick="runOptimizer()">Run Optimizer</button>
+        </div>
+        <div id="opt-result" class="optimizer-result">
+          <div class="result-empty">
+            <div class="result-empty-icon">⚡</div>
+            <p>Enter assets JSON and click "Run Optimizer"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── POLICY ENGINE ───────────────────── -->
+  <section class="section hidden" id="section-policy">
+    <div class="container">
+      <h2 class="section-title">Fail-Closed Policy Engine</h2>
+      <p class="section-sub">Test whether a proposed action would be permitted by Martin's policy rules.</p>
+      <div class="policy-grid">
+        <div class="policy-input">
+          <div class="input-group">
+            <label>Action description</label>
+            <input type="text" id="pol-action" value="scan_coinmarketcap" />
+          </div>
+          <div class="input-group">
+            <label>Risk level</label>
+            <select id="pol-risk">
+              <option value="read_only">read_only</option>
+              <option value="low">low</option>
+              <option value="medium">medium</option>
+              <option value="high">high</option>
+              <option value="critical">critical</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Value (USD)</label>
+            <input type="number" id="pol-value" value="0" min="0" step="0.01" />
+          </div>
+          <div class="input-group checkbox-group">
+            <label>
+              <input type="checkbox" id="pol-approved" />
+              User explicitly approved
+            </label>
+          </div>
+          <button class="btn-primary" onclick="checkPolicy()">Check Policy</button>
+          <div class="policy-warning">
+            ⛔ Private keys and seed phrases are <strong>NEVER</strong> accepted, stored, or requested.
+          </div>
+        </div>
+        <div id="policy-result" class="policy-result">
+          <div class="result-empty">
+            <div class="result-empty-icon">🔒</div>
+            <p>Configure action and click "Check Policy"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── ARCHITECTURE ───────────────────── -->
+  <section class="section arch-section" id="section-architecture">
+    <div class="container">
+      <h2 class="section-title">Architecture</h2>
+      <div class="arch-flow">
+        <div class="arch-node source">CoinMarketCap API</div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-node core">Martin Score Engine<br/><small>M = α·S + β·P + γ·C − δ·Risk</small></div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-row">
+          <div class="arch-node label">DORMANT</div>
+          <div class="arch-node label recoverable">RECOVERABLE</div>
+          <div class="arch-node label">MIGRATED</div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-node core">QUBO Optimizer<br/><small>Classical exact / Greedy</small></div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-node security">Fail-Closed Policy Engine<br/><small>No private keys. User approval required.</small></div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-node wallet">🔐 Your Wallet (User Controls)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── FOOTER ───────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <p>Martin's Algorithm v1.0 — MIT License — <a href="https://github.com/elon00/luther-algorithm" target="_blank">GitHub</a></p>
+      <p class="footer-disclaimer">
+        Research &amp; opportunity-detection platform only. No seed phrases or private keys are stored.
+        Independent security audit required before handling real funds.
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
