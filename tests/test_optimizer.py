@@ -3,11 +3,10 @@ Tests — QUBO Builder and Optimizer
 """
 
 import pytest
-import numpy as np
-from martin_core.qubo import build_cardinality_qubo, evaluate_qubo, selected_assets
-from martin_core.optimizer import exact_select, greedy_select, select
-from martin_core.scoring import Candidate
 
+from martin_core.optimizer import exact_select, greedy_select, select
+from martin_core.qubo import build_cardinality_qubo, evaluate_qubo, selected_assets
+from martin_core.scoring import Candidate
 
 # ── QUBO tests ───────────────────────────────────────────────
 

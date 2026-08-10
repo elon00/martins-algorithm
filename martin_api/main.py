@@ -17,19 +17,18 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from data.coinmarketcap import CoinMarketCapAdapter
-from martin_core.classifier import batch_classify, classify
+from martin_core.classifier import classify
 from martin_core.optimizer import select
 from martin_core.policy import ActionRequest, PolicyEngine, RiskLevel
-from martin_core.scoring import Candidate, martin_score, rank_candidates
-from martin_core.scoring import recovery_probability
+from martin_core.scoring import Candidate, martin_score, rank_candidates, recovery_probability
 
 from .schemas import (
-    AssetIn,
     AssetClassifyOut,
+    AssetIn,
     AssetScoreOut,
+    OpportunityOut,
     OptimizeOut,
     OptimizeRequest,
-    OpportunityOut,
     PolicyCheckOut,
     PolicyCheckRequest,
     RankOut,

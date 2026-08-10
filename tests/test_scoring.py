@@ -2,17 +2,14 @@
 Tests — Martin Score Engine
 """
 
-import pytest
 from martin_core.scoring import (
-    Candidate,
     DEFAULT_WEIGHTS,
+    Candidate,
     clamp,
     martin_score,
     rank_candidates,
-    recovery_probability,
     sigmoid,
 )
-
 
 # ── Helpers ──────────────────────────────────────────────────
 

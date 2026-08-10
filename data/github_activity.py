@@ -17,7 +17,7 @@ from __future__ import annotations
 import logging
 import os
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import httpx
 
@@ -72,7 +72,7 @@ class GitHubActivityAdapter:
         pushed_at = repo_data.get("pushed_at")
         if pushed_at:
             pushed_dt = datetime.fromisoformat(pushed_at.replace("Z", "+00:00"))
-            days_since = (datetime.now(timezone.utc) - pushed_dt).days
+            days_since = (datetime.now(UTC) - pushed_dt).days
         else:
             days_since = 9999
 
@@ -125,7 +125,7 @@ class GitHubActivityAdapter:
 
     def _count_recent_commits(self, owner: str, repo: str, days: int) -> int:
         from datetime import timedelta
-        since = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+        since = (datetime.now(UTC) - timedelta(days=days)).isoformat()
         try:
             data = self._get(
                 f"/repos/{owner}/{repo}/commits",

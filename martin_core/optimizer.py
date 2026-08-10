@@ -19,7 +19,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from itertools import combinations
 
-from .qubo import QUBO, build_cardinality_qubo, evaluate_qubo
+from .qubo import build_cardinality_qubo, evaluate_qubo
 from .scoring import Candidate, martin_score
 
 

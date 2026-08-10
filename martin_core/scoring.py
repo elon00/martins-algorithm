@@ -14,9 +14,9 @@ where:
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from math import exp
-from typing import Mapping
 
 # ---------------------------------------------------------------------------
 # Feature definitions

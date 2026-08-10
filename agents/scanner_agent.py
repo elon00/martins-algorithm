@@ -13,7 +13,6 @@ import asyncio
 import logging
 import time
 from dataclasses import dataclass, field
-from typing import Any
 
 from data.coinmarketcap import CoinMarketCapAdapter
 from martin_core.classifier import AssetStatus, ClassificationResult, batch_classify

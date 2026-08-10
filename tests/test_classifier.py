@@ -2,8 +2,7 @@
 Tests — Asset Classifier
 """
 
-import pytest
-from martin_core.classifier import AssetStatus, classify, batch_classify
+from martin_core.classifier import AssetStatus, batch_classify, classify
 from martin_core.scoring import Candidate
 
 
