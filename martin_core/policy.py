@@ -69,8 +69,7 @@ class PolicyEngine:
             )
 
         # Rule 2-3: CRITICAL / HIGH always need user approval
-        if request.risk in (RiskLevel.CRITICAL, RiskLevel.HIGH):
-            if not request.user_approved:
+        if request.risk in (RiskLevel.CRITICAL, RiskLevel.HIGH) and not request.user_approved:
                 return PolicyDecision(
                     approved=False,
                     reason=f"{request.risk.value.upper()} action requires explicit user approval.",

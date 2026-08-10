@@ -71,7 +71,7 @@ class GitHubActivityAdapter:
         # Days since last push
         pushed_at = repo_data.get("pushed_at")
         if pushed_at:
-            pushed_dt = datetime.fromisoformat(pushed_at.replace("Z", "+00:00"))
+            pushed_dt = datetime.fromisoformat(pushed_at)
             days_since = (datetime.now(UTC) - pushed_dt).days
         else:
             days_since = 9999
