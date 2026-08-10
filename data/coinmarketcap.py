@@ -103,7 +103,7 @@ class CoinMarketCapAdapter:
             try:
                 candidate = self._coin_to_candidate(coin)
                 candidates.append(candidate)
-            except Exception as exc:
+            except (ValueError, KeyError, TypeError) as exc:
                 logger.debug("Skipping coin %s: %s", coin.get("symbol"), exc)
         return candidates
 

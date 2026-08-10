@@ -186,7 +186,7 @@ def scan_coinmarketcap(req: ScanRequest):
     )
     try:
         result = agent.scan_once(top_k_opportunities=req.top_k_opportunities)
-    except Exception as exc:
+    except (ValueError, KeyError, TypeError, PermissionError) as exc:
         raise HTTPException(status_code=500, detail=str(exc))
 
     return ScanOut(

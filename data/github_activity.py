@@ -132,7 +132,7 @@ class GitHubActivityAdapter:
                 params={"since": since, "per_page": 100},
             )
             return len(data) if isinstance(data, list) else 0
-        except Exception:
+        except (httpx.HTTPStatusError, httpx.RequestError, ValueError):
             return 0
 
     def _count_contributors(self, owner: str, repo: str) -> int:
@@ -142,7 +142,7 @@ class GitHubActivityAdapter:
                 params={"per_page": 100, "anon": "false"},
             )
             return len(data) if isinstance(data, list) else 0
-        except Exception:
+        except (httpx.HTTPStatusError, httpx.RequestError, ValueError):
             return 0
 
     def _get(self, path: str, params: dict | None = None) -> dict | list:

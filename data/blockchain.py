@@ -127,7 +127,7 @@ class BlockchainAdapter:
         try:
             resp = self._get(base_url, params)
             return resp.get("status") == "1"
-        except Exception:
+        except (httpx.HTTPStatusError, httpx.RequestError, ValueError):
             return False
 
     def _estimate_tx_activity(
@@ -150,7 +150,7 @@ class BlockchainAdapter:
             if isinstance(txs, list):
                 return len(txs)
             return 0
-        except Exception:
+        except (httpx.HTTPStatusError, httpx.RequestError, ValueError):
             return 0
 
     def _get(self, url: str, params: dict) -> dict[str, Any]:

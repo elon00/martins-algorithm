@@ -100,7 +100,7 @@ class ScannerAgent:
                 page_candidates = self.cmc.listings_to_candidates(listings)
                 candidates.extend(page_candidates)
                 logger.debug("Page %d: %d candidates", page + 1, len(page_candidates))
-            except Exception as exc:
+            except (ValueError, KeyError, TypeError) as exc:
                 msg = f"Page {page + 1} failed: {exc}"
                 logger.warning(msg)
                 errors.append(msg)
@@ -149,7 +149,7 @@ class ScannerAgent:
         while self._running:
             try:
                 self.scan_once()
-            except Exception as exc:
+            except (ValueError, KeyError, TypeError, PermissionError) as exc:
                 logger.error("Scan failed: %s", exc)
             await asyncio.sleep(self.scan_interval)
 
