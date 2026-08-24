@@ -1,4 +1,4 @@
-﻿name: Self-Healing Web4 CI/CD Pipeline
+﻿name: Martin Web4 CI/CD Pipeline
 
 on:
   push:
@@ -7,10 +7,8 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build-and-self-heal:
+  test_and_verify:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
     - name: 📥 Checkout Repository
@@ -21,20 +19,15 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: 📦 Install Tools & Dependencies
+    - name: 📦 Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install ruff pytest numpy web3
 
-    - name: 🩹 Self-Healing Auto-Correction (Ruff Auto-Fix)
+    - name: 🔍 Lint with Ruff (Auto-Tolerant)
       run: |
-        ruff check --fix . || true
-        ruff format . || true
+        ruff check . --fix || true
 
-    - name: 🧪 Run Master Pipeline Verification
+    - name: 🧪 Run Master Pipeline
       run: |
         python main.py
-
-    - name: 🛡️ Security Policy Verification
-      run: |
-        echo "Fail-Closed Policy Engine: Verified [✓]"
