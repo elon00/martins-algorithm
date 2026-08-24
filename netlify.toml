@@ -1,6 +1,7 @@
 ﻿[build]
   publish = "public"
-  command = "echo 'Dashboard ready'"
+  command = "echo 'Deploying Martin Algorithm Web4 Testnet Network...'"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
