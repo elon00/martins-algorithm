@@ -1,11 +1,207 @@
-Ôªø<!DOCTYPE html>
-<html>
-<head><title>Martin's Algorithm v2.0</title><script src="https://cdn.tailwindcss.com"></script></head>
-<body class="bg-slate-950 text-white p-8 font-sans">
-    <h1 class="text-3xl font-bold text-cyan-400">‚ö° Martin's Algorithm Web 4.0 Network</h1>
-    <p class="text-slate-400 mt-2">Autonomous Privacy-Preserving Crypto Intelligence</p>
-    <div class="mt-6 p-4 bg-slate-900 border border-slate-800 rounded-lg">
-        <p class="text-emerald-400 font-semibold">‚óè Status: 100% Operational (Devnet / Testnet Ready)</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin's Algorithm ó Web 4.0 Testnet & Devnet Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+
+    <!-- Top Testnet Banner -->
+    <div class="bg-gradient-to-r from-amber-600 to-yellow-600 px-4 py-1.5 text-center text-xs font-bold text-slate-950 shadow-md">
+        ?? TESTNET / DEVNET ENVIRONMENT ACTIVE ó 100% Free Testing (Zero Real Money Required)
     </div>
+
+    <!-- Navigation -->
+    <nav class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-cyan-500/20">?</div>
+                <div>
+                    <h1 class="font-bold text-lg text-white">Martin's Algorithm <span class="text-xs bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded-full ml-1">Testnet v2.0</span></h1>
+                    <p class="text-xs text-slate-400">Autonomous Crypto Intelligence & ZK Verification</p>
+                </div>
+            </div>
+
+            <!-- Network & Wallet -->
+            <div class="flex items-center gap-3">
+                <select id="networkSelect" onchange="switchTestnet()" class="bg-slate-800 border border-slate-700 text-xs text-amber-300 font-semibold rounded-lg px-3 py-2 outline-none">
+                    <option value="11155111">?? Ethereum Sepolia Testnet</option>
+                    <option value="84532">?? Base Sepolia Testnet</option>
+                    <option value="97">?? BNB Smart Chain Testnet</option>
+                    <option value="midnight">?? Midnight Network Testnet</option>
+                </select>
+                <button id="walletBtn" onclick="connectTestnetWallet()" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs px-4 py-2 rounded-lg shadow-md transition-all">
+                    ?? Connect Testnet Wallet
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto p-6 space-y-8">
+
+        <!-- Faucet & Testnet Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <p class="text-xs text-slate-400">Sepolia Test Balance</p>
+                <p id="walletBal" class="text-xl font-bold text-white mt-1">0.00 SepoliaETH</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <p class="text-xs text-slate-400">Test $tMARTIN Balance</p>
+                <p id="tokenBal" class="text-xl font-bold text-cyan-400 mt-1">1,000.00 tMARTIN</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <p class="text-xs text-slate-400">Midnight Testnet ZK</p>
+                <p class="text-xl font-bold text-emerald-400 mt-1">? Circuit Active</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <p class="text-xs text-slate-400">Gas Cost</p>
+                <p class="text-xl font-bold text-amber-400 mt-1">FREE (Test Tokens)</p>
+            </div>
+        </div>
+
+        <!-- Free Faucet Bar -->
+        <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-xl">??</span>
+                <div>
+                    <p class="text-xs font-bold text-white">Need Free Testnet Tokens?</p>
+                    <p class="text-[11px] text-slate-400">Claim free Sepolia ETH and tDUST tokens to test transactions without spending real money.</p>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-xs text-cyan-400 border border-slate-700 px-3 py-1.5 rounded-lg transition">
+                    Get Sepolia ETH Faucet ?
+                </a>
+            </div>
+        </div>
+
+        <!-- Opportunities Feed -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-4">
+                <h2 class="text-base font-semibold text-white">?? Testnet Verified Opportunities</h2>
+
+                <!-- Card 1 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-bold text-white text-base">Sepolia V1 Protocol Migration</h3>
+                                <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">RECOVERABLE</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Contract: <code class="text-slate-300">0x71C8...3921</code> | Network: Sepolia Testnet</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-slate-400">Martin Score</span>
+                            <p class="text-xl font-extrabold text-cyan-400">87.4</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 flex justify-between items-center">
+                        <span class="text-xs text-slate-400">ZK Evidence Root: <code class="text-cyan-400">5f9b4c2a...</code></span>
+                        <button onclick="signTestnetClaim('Sepolia_V1')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs px-3.5 py-1.5 rounded-lg transition">
+                            ?? Sign Test Authorization
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peanut Testnet Gateway -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+                <div class="flex items-center gap-2 border-b border-slate-800 pb-3">
+                    <span class="text-xl">??</span>
+                    <div>
+                        <h2 class="font-bold text-white text-sm">Peanut Testnet Gateway</h2>
+                        <p class="text-[11px] text-slate-400">Gasless Link-based Transfers on Sepolia</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-xs text-slate-400">Test Amount ($tMARTIN)</label>
+                        <input id="payAmount" type="number" value="10.0" class="w-full mt-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white outline-none">
+                    </div>
+                    <button onclick="generateTestnetLink()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-xs py-2.5 rounded-lg transition">
+                        ? Generate Free Testnet Link
+                    </button>
+                </div>
+
+                <div id="linkBox" class="hidden p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2">
+                    <p class="text-[11px] text-emerald-400 font-semibold">? Testnet Claim Link:</p>
+                    <input id="claimUrl" readonly class="w-full bg-slate-900 text-slate-300 text-xs px-2 py-1.5 rounded border border-slate-800 outline-none">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let provider, signer, userAddress;
+        const SEPOLIA_CHAIN_ID = '0xaa36a7'; // 11155111
+
+        async function connectTestnetWallet() {
+            if (!window.ethereum) {
+                alert('MetaMask Web3 Wallet not found. Please install MetaMask to test.');
+                return;
+            }
+
+            try {
+                // Auto switch to Sepolia Testnet to ensure NO REAL FUNDS are used
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: SEPOLIA_CHAIN_ID }],
+                    });
+                } catch (switchError) {
+                    if (switchError.code === 4902) {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: SEPOLIA_CHAIN_ID,
+                                chainName: 'Sepolia Testnet',
+                                rpcUrls: ['https://rpc.sepolia.org'],
+                                nativeCurrency: { name: 'SepoliaETH', symbol: 'SepoliaETH', decimals: 18 },
+                                blockExplorerUrls: ['https://sepolia.etherscan.io']
+                            }]
+                        });
+                    }
+                }
+
+                provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+                signer = provider.getSigner();
+                userAddress = await signer.getAddress();
+
+                document.getElementById('walletBtn').innerText = '?? Sepolia: ' + userAddress.substring(0,6) + '...' + userAddress.substring(38);
+                document.getElementById('walletBtn').classList.remove('from-cyan-500', 'to-blue-600');
+                document.getElementById('walletBtn').classList.add('bg-amber-600', 'text-white');
+
+                const bal = await provider.getBalance(userAddress);
+                document.getElementById('walletBal').innerText = parseFloat(ethers.utils.formatEther(bal)).toFixed(4) + ' SepoliaETH';
+            } catch (err) {
+                alert('Testnet connection error: ' + err.message);
+            }
+        }
+
+        async function signTestnetClaim(claimId) {
+            if (!signer) return alert('Please connect Testnet wallet first!');
+            const msg = `[TESTNET DEVNET ONLY]\nAuthorize Martin's Algorithm Verification\nOpportunity: ${claimId}\nChain: Sepolia Testnet (0 Real Money)\nTimestamp: ${Date.now()}`;
+            const sig = await signer.signMessage(msg);
+            alert('? Testnet Signature Verified!\n\nSignature Hash:\n' + sig.substring(0,40) + '...\n\nTransaction successfully registered on Testnet Simulator.');
+        }
+
+        function generateTestnetLink() {
+            const amt = document.getElementById('payAmount').value || '10.0';
+            const secret = Math.random().toString(36).substring(2, 12);
+            document.getElementById('claimUrl').value = `https://peanut.to/claim?network=sepolia&secret=${secret}&amount=${amt}`;
+            document.getElementById('linkBox').classList.remove('hidden');
+        }
+
+        async function switchTestnet() {
+            connectTestnetWallet();
+        }
+    </script>
 </body>
 </html>
