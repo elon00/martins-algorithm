@@ -24,9 +24,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install ruff pytest numpy web3
 
-    - name: 🔍 Lint with Ruff (Auto-Tolerant)
+    - name: 🔍 Lint with ruff (Self-Healing)
       run: |
-        ruff check . --fix || true
+        ruff check --fix . || true
+        ruff format . || true
 
     - name: 🧪 Run Master Pipeline
       run: |

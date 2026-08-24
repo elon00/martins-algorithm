@@ -21,6 +21,7 @@ class MartinScoringEngine:
     """Computes deterministic Martin Score v2.0."""
 
     def __init__(self, weights: Optional[MartinWeights] = None) -> None:
+        """Initializes scoring engine."""
         self.weights = weights if weights is not None else DEFAULT_WEIGHTS
         self.version = "martin-v2.0"
 
