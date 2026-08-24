@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martin's Algorithm — Google AI Studio Agentic Workspace</title>
+    <title>Martin's Algorithm — Web 4.0 Crypto Intelligence & ZK Verification</title>
     <!-- Google Fonts & Tailwind -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- Navbar -->
+    <!-- Top Header -->
     <header class="border-b border-[#37393b] bg-[#1e1f20]/90 backdrop-blur px-6 py-3 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="flex items-center gap-3">
@@ -30,13 +30,13 @@
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="font-bold text-white text-base tracking-tight">Martin's Algorithm</span>
-                        <span class="text-[10px] bg-[#28292a] text-[#8ab4f8] border border-[#444746] px-2 py-0.5 rounded-md font-medium">AI Studio Agentic v2.0</span>
+                        <span class="text-[10px] bg-[#28292a] text-[#8ab4f8] border border-[#444746] px-2 py-0.5 rounded-md font-medium">Web4 Agentic Studio</span>
                     </div>
                     <p class="text-[11px] text-[#c4c7c5]">Autonomous Crypto Intelligence & Privacy-Preserving ZK Network</p>
                 </div>
             </div>
 
-            <!-- Agent Model & Wallet -->
+            <!-- Agent Model Selector & Wallet -->
             <div class="flex items-center gap-3">
                 <select id="agentSelect" class="google-input text-xs text-[#8ab4f8] font-medium rounded-lg px-3 py-1.5 outline-none">
                     <option value="orchestrator">👑 Orchestrator Agent (Master)</option>
@@ -76,7 +76,7 @@
                         <span class="text-lg">🤖</span>
                         <div>
                             <h2 class="text-sm font-bold text-white">Martin AI Agentic Console</h2>
-                            <p class="text-[11px] text-[#c4c7c5]">Multi-Agent Autonomous Intelligence</p>
+                            <p class="text-[11px] text-[#c4c7c5]">Autonomous Multi-Agent Intelligence System</p>
                         </div>
                     </div>
                     <span class="text-[11px] text-[#c4eed0] bg-[#1e3a2f] px-2.5 py-1 rounded-full border border-[#2d5f47]">● Agents Active</span>
@@ -86,8 +86,8 @@
                 <div id="chatHistory" class="flex-1 overflow-y-auto space-y-3 pr-2 font-sans text-xs">
                     <div class="bg-[#131314] p-3.5 rounded-xl border border-[#37393b] text-[#e3e3e3] max-w-[85%]">
                         <span class="text-[#8ab4f8] font-bold">Martin Orchestrator:</span>
-                        <p class="mt-1">नमस्ते! मैं Martin's Algorithm AI Agent हूँ। मैं पूरी क्रिप्टो दुनिया में लेजिटिमेट रिकवरी अपॉर्चुनिटीज खोजने, Martin Score v2.0 कैलकुलेट करने, QUBO क्वांटम ऑप्टिमाइजेशन चलाने और Midnight ZK प्रूफ्स वेरिफाई करने के लिए तैयार हूँ।</p>
-                        <p class="mt-1 text-[#c4c7c5] font-mono text-[11px]">नीचे दिए गए क्विक प्रॉम्प्ट्स से शुरू करें या सीधे सवाल पूछें 👇</p>
+                        <p class="mt-1">Hello! I am the Martin's Algorithm Autonomous AI Agent. I am ready to scan the crypto ecosystem for legitimate recovery opportunities, compute Martin Score v2.0, execute QUBO quantum portfolio optimization, and verify Midnight Zero-Knowledge Merkle proofs.</p>
+                        <p class="mt-1 text-[#c4c7c5] font-mono text-[11px]">Select a quick prompt below or enter your query 👇</p>
                     </div>
                 </div>
 
@@ -107,9 +107,9 @@
                     </button>
                 </div>
 
-                <!-- Chat Input Box -->
+                <!-- Chat Input -->
                 <div class="flex gap-2">
-                    <input id="chatInput" type="text" placeholder="Ask Martin AI Agent (e.g. Scan 0x123..., optimize portfolio, check ZK status)..." onkeydown="if(event.key==='Enter') sendChatMessage()" class="google-input flex-1 px-4 py-2.5 rounded-xl text-xs text-white outline-none focus:border-[#8ab4f8]">
+                    <input id="chatInput" type="text" placeholder="Ask Martin AI Agent (e.g., Scan 0x123..., optimize portfolio, verify ZK root)..." onkeydown="if(event.key==='Enter') sendChatMessage()" class="google-input flex-1 px-4 py-2.5 rounded-xl text-xs text-white outline-none focus:border-[#8ab4f8]">
                     <button onclick="sendChatMessage()" class="google-blue font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-sm">
                         Send ➔
                     </button>
@@ -133,7 +133,7 @@
                             <p class="text-xl font-bold text-[#8ab4f8]">87.4 / 100</p>
                         </div>
                     </div>
-                    <p class="text-xs text-[#c4c7c5]">Signals: 17 on-chain migration events confirmed. User claimable token redemption active.</p>
+                    <p class="text-xs text-[#c4c7c5]">Signals: 17 on-chain migration events confirmed. User claimable redemption contract active.</p>
                     <button onclick="signTestClaim('OldProtocolV1')" class="google-blue w-full font-bold text-xs py-2 rounded-lg">Sign Verification</button>
                 </div>
 
@@ -149,7 +149,7 @@
                             <p class="text-xl font-bold text-[#8ab4f8]">79.2 / 100</p>
                         </div>
                     </div>
-                    <p class="text-xs text-[#c4c7c5]">Signals: Unclaimed staking rewards in legacy pool contract. Zero vulnerability detected.</p>
+                    <p class="text-xs text-[#c4c7c5]">Signals: Unclaimed staking rewards verified in legacy pool contract. Zero critical vulnerabilities.</p>
                     <button onclick="signTestClaim('LegacyStaking')" class="google-blue w-full font-bold text-xs py-2 rounded-lg">Sign Verification</button>
                 </div>
             </div>
@@ -162,9 +162,9 @@
                 <p class="text-xs text-[#c4c7c5]">Formulation: \(\min x^T Q x\) using Classical Simulated Annealing with QAOA quantum accelerator bridge.</p>
                 <div class="p-4 google-input rounded-xl font-mono text-xs text-[#c4eed0] space-y-1">
                     <p>[✓] QUBO Matrix Size: 3x3 Candidate Assets</p>
-                    <p>[✓] Linear Diagonal Constraints: Maximizing Martin Scores</p>
+                    <p>[✓] Linear Constraints: Maximizing Deterministic Martin Scores</p>
                     <p>[✓] Quadratic Penalty: Penalizing Risk Overlap & Max Portfolio Cap (K=2)</p>
-                    <p>[✓] Solved State: Selected Candidate #1 (Score: 87.4) & Candidate #2 (Score: 79.2)</p>
+                    <p>[✓] Solved Optimal State: Selected Candidate #1 (Score: 87.4) & Candidate #2 (Score: 79.2)</p>
                 </div>
                 <button onclick="alert('⚛️ QUBO Solver Re-executed: Optimal Portfolio State 100% Converged!')" class="google-blue text-xs font-bold px-4 py-2 rounded-lg">
                     Re-Run Simulated Annealing Optimizer
@@ -238,7 +238,7 @@
                     activateUI(currentWalletAddress, "MetaMask");
                     return;
                 } catch (e) {
-                    console.log("MetaMask popup closed, using instant wallet");
+                    console.log("MetaMask popup dismissed, using instant testnet wallet");
                 }
             }
             const randomWallet = ethers.Wallet.createRandom();
@@ -284,15 +284,15 @@
                 let reply = "";
                 const q = query.toLowerCase();
                 if (q.includes("scan") || q.includes("recoverable")) {
-                    reply = "🔍 <b>[Discovery Agent]</b> 2 लेजिटिमेट रिकवरी कैंडिडेट्स मिले हैं:<br>1. <b>OldProtocolV1</b> (Score: 87.4, Status: RECOVERABLE)<br>2. <b>LegacyStakingPool</b> (Score: 79.2, Status: ACTIVE_CLAIM). आप 'Opportunity Scanner' टैब में जाकर डिटेल्स देख सकते हैं।";
+                    reply = "🔍 <b>[Discovery Agent]</b> Identified 2 verified recovery candidates:<br>1. <b>OldProtocolV1</b> (Score: 87.4, Status: RECOVERABLE)<br>2. <b>LegacyStakingPool</b> (Score: 79.2, Status: ACTIVE_CLAIM). View details in the 'Opportunity Scanner' tab.";
                 } else if (q.includes("score") || q.includes("calculate") || q.includes("martin")) {
-                    reply = "🧮 <b>[Scoring Agent]</b> Martin Score v2.0 Formula: <code>M = 0.60*S + 0.25*P_rec + 0.15*C - 0.50*Risk</code><br>OldProtocolV1 के लिए: Health=85, P_rec=90, Conf=95, Risk=15 => <b>Score = 87.4 / 100</b> [100% Deterministic]";
+                    reply = "🧮 <b>[Scoring Agent]</b> Martin Score v2.0 Formula: <code>M = 0.60*S + 0.25*P_rec + 0.15*C - 0.50*Risk</code><br>Evaluated OldProtocolV1: Health=85, P_rec=90, Conf=95, Risk=15 => <b>Score = 87.4 / 100</b> [100% Deterministic]";
                 } else if (q.includes("qubo") || q.includes("quantum") || q.includes("portfolio")) {
-                    reply = "⚛️ <b>[Quantum Optimizer Agent]</b> QUBO Simulated Annealing रन किया गया। कुल 3 कैंडिडेट्स में से Top 2 हाई-रिकवरी / लो-रिस्क एसेट्स सेलेक्ट किए गए। पोर्टफोलियो एनर्जी स्टेट कन्वर्ज हो चुकी है।";
+                    reply = "⚛️ <b>[Quantum Optimizer Agent]</b> QUBO Simulated Annealing completed. Selected Top 2 high-recovery / low-risk assets from 3 candidates. Portfolio energy state converged.";
                 } else if (q.includes("zk") || q.includes("midnight") || q.includes("proof")) {
-                    reply = "🔐 <b>[Midnight ZK Agent]</b> क्रिप्टोग्राफिक एविडेंस मर्कल रूट: <code>5f9b4c2a8190d7e4b3c2...</code>। Compact ZK Circuit ने बिना प्राइवेट डेटा लीक किए इस कंप्यूटेशन को ऑन-चेन वेरिफाइड घोषित किया है।";
+                    reply = "🔐 <b>[Midnight ZK Agent]</b> Cryptographic Evidence Merkle Root: <code>5f9b4c2a8190d7e4b3c2...</code>. Compact ZK Circuit verified the computation on-chain without exposing private data.";
                 } else {
-                    reply = `👑 <b>[Martin Orchestrator]</b> आपके इनपुट <i>"${query}"</i> को प्रोसेस कर लिया गया है। मल्टी-एजेंट फैब्रिक सक्रिय है और सभी सुरक्षा नीतियां (Fail-Closed) 100% लागू हैं।`;
+                    reply = `👑 <b>[Martin Orchestrator]</b> Processed query: <i>"${query}"</i>. Multi-agent fabric is active with 100% Fail-Closed policy enforcement.`;
                 }
                 appendMessage("Martin AI Agent", reply, false);
             }, 600);
