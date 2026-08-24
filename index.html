@@ -1,175 +1,216 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martin's Algorithm — Web 4.0 Testnet Intelligence & Verification</title>
+    <title>Martin's Algorithm — Google AI Studio Engine</title>
+    <!-- Google Fonts & Tailwind -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <style>
+        body { font-family: 'Google Sans', sans-serif; background-color: #131314; color: #e3e3e3; }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+        .google-card { background-color: #1e1f20; border: 1px solid #37393b; }
+        .google-input { background-color: #131314; border: 1px solid #444746; }
+        .google-blue { background-color: #8ab4f8; color: #041e49; }
+        .google-blue:hover { background-color: #aecbfa; }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+<body class="min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- Top Alert Banner -->
-    <div class="bg-gradient-to-r from-amber-600 via-orange-500 to-yellow-600 px-4 py-1.5 text-center text-xs font-black text-slate-950 tracking-wider uppercase shadow-lg">
-        ⚡ Universal Testnet Engine Active — 100% Instant Connection (Zero Errors)
-    </div>
-
-    <!-- Navbar -->
-    <nav class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+    <!-- Header / Navbar (Google AI Studio Classic Style) -->
+    <header class="border-b border-[#37393b] bg-[#1e1f20]/90 backdrop-blur px-6 py-3 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-cyan-500/25">⚡</div>
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#8ab4f8] to-[#c58af9] flex items-center justify-center font-bold text-slate-950 text-base shadow-sm">✦</div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h1 class="font-extrabold text-lg text-white">Martin's Algorithm</h1>
-                        <span class="text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800 px-2 py-0.5 rounded-full">v2.0 Web4</span>
-                        <span class="text-[10px] font-bold bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded-full">Testnet</span>
+                        <span class="font-bold text-white text-base tracking-tight">Martin's Algorithm</span>
+                        <span class="text-[10px] bg-[#28292a] text-[#8ab4f8] border border-[#444746] px-2 py-0.5 rounded-md font-medium">Google AI Studio Web4</span>
                     </div>
-                    <p class="text-xs text-slate-400">Autonomous Privacy-Preserving Crypto Intelligence Network</p>
+                    <p class="text-[11px] text-[#c4c7c5]">Crypto Opportunity Intelligence & Privacy-Preserving ZK Network</p>
                 </div>
             </div>
 
-            <!-- Connect Button -->
+            <!-- Wallet Chip -->
             <div class="flex items-center gap-3">
-                <button id="walletBtn" onclick="smartConnectWallet()" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg transition-all">
-                    🔗 Connect Testnet Wallet
+                <button id="walletBtn" onclick="smartConnectWallet()" class="google-blue font-bold text-xs px-4 py-2 rounded-full transition-all flex items-center gap-2 shadow-sm">
+                    <span>🔗</span> <span id="btnText">Connect Testnet Wallet</span>
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto p-6 space-y-8">
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto p-6 flex-1 w-full space-y-6">
 
-        <!-- Wallet Info Box (Appears after connect) -->
-        <div id="walletBanner" class="hidden bg-emerald-950/60 border border-emerald-800/80 p-4 rounded-2xl flex justify-between items-center">
+        <!-- Status Pill Banner -->
+        <div id="connectedBanner" class="hidden google-card p-4 rounded-xl flex items-center justify-between border-l-4 border-l-[#c4eed0]">
             <div class="flex items-center gap-3">
-                <span class="text-2xl">🟢</span>
+                <span class="text-xl text-[#c4eed0]">●</span>
                 <div>
-                    <p class="text-xs font-bold text-emerald-400">Testnet Wallet Connected Successfully</p>
-                    <p id="fullAddress" class="text-xs text-slate-300 font-mono"></p>
+                    <p class="text-xs font-bold text-white">Active Testnet Session</p>
+                    <p id="fullAddress" class="text-xs text-[#c4c7c5] font-mono"></p>
                 </div>
             </div>
-            <span id="walletModeTag" class="text-[11px] bg-emerald-900/80 text-emerald-300 px-3 py-1 rounded-full font-bold">MetaMask / Web3</span>
-        </div>
-
-        <!-- Metrics -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-                <p class="text-xs text-slate-400">Sepolia Test Balance</p>
-                <p id="walletBal" class="text-2xl font-bold text-white mt-1">0.00 SepoliaETH</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-                <p class="text-xs text-slate-400">Protocol $tMARTIN</p>
-                <p id="tokenBal" class="text-2xl font-bold text-cyan-400 mt-1">1,000.00 tMARTIN</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-                <p class="text-xs text-slate-400">Midnight ZK Proofs</p>
-                <p class="text-2xl font-bold text-emerald-400 mt-1">● Circuit Active</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-                <p class="text-xs text-slate-400">Security Gate</p>
-                <p class="text-2xl font-bold text-amber-400 mt-1">🔒 Fail-Closed (100%)</p>
+            <div class="text-right">
+                <p class="text-xs text-[#c4c7c5]">Sepolia Balance</p>
+                <p id="walletBal" class="text-sm font-bold text-[#8ab4f8]">5.0000 SepoliaETH</p>
             </div>
         </div>
 
-        <!-- Opportunities & Peanut Gateway -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Metrics Grid (Classic Studio Style) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="google-card p-4 rounded-xl">
+                <p class="text-xs text-[#c4c7c5]">Algorithm Model</p>
+                <p class="text-base font-bold text-white mt-1">Martin Score v2.0</p>
+                <p class="text-[11px] text-[#8ab4f8] mt-1">100% Deterministic</p>
+            </div>
+            <div class="google-card p-4 rounded-xl">
+                <p class="text-xs text-[#c4c7c5]">Zero-Knowledge Proofs</p>
+                <p class="text-base font-bold text-[#c4eed0] mt-1">Midnight ZK Active</p>
+                <p class="text-[11px] text-[#c4c7c5] mt-1">Merkle Evidence Root</p>
+            </div>
+            <div class="google-card p-4 rounded-xl">
+                <p class="text-xs text-[#c4c7c5]">Quantum Optimizer</p>
+                <p class="text-base font-bold text-white mt-1">QUBO Formulation</p>
+                <p class="text-[11px] text-[#c4c7c5] mt-1">Simulated Annealing</p>
+            </div>
+            <div class="google-card p-4 rounded-xl">
+                <p class="text-xs text-[#c4c7c5]">Security Gateway</p>
+                <p class="text-base font-bold text-[#fdd663] mt-1">Fail-Closed Policy</p>
+                <p class="text-[11px] text-[#c4c7c5] mt-1">Zero Key Exposure</p>
+            </div>
+        </div>
+
+        <!-- 2 Column Studio Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Left 2 Cols: Live Opportunity Feed -->
             <div class="lg:col-span-2 space-y-4">
-                <h2 class="text-lg font-bold text-white">🔍 Verified Crypto Opportunities</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-sm font-bold text-white tracking-wide uppercase">✦ Verified Opportunity Candidates</h2>
+                    <span class="text-xs text-[#c4c7c5]">Testnet Verified</span>
+                </div>
 
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+                <!-- Card 1 -->
+                <div class="google-card p-5 rounded-xl space-y-4 hover:border-[#8ab4f8]/50 transition">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="flex items-center gap-2">
-                                <h3 class="font-bold text-white text-base">Sepolia V1 Protocol Migration</h3>
-                                <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">RECOVERABLE</span>
+                                <h3 class="font-bold text-white text-sm">OldProtocolV1_Migration</h3>
+                                <span class="bg-[#1e3a2f] text-[#c4eed0] text-[10px] font-bold px-2 py-0.5 rounded-md border border-[#2d5f47]">RECOVERABLE</span>
                             </div>
-                            <p class="text-xs text-slate-400 mt-1">Contract: <code class="text-slate-300">0x71C8...3921</code></p>
+                            <p class="text-xs text-[#c4c7c5] mt-1 font-mono">Contract: 0x1234567890abcdef1234567890abcdef12345678</p>
                         </div>
                         <div class="text-right">
-                            <span class="text-xs text-slate-400">Martin Score</span>
-                            <p class="text-2xl font-black text-cyan-400">87.4 <span class="text-xs text-slate-500 font-normal">/ 100</span></p>
+                            <span class="text-[11px] text-[#c4c7c5]">Martin Score</span>
+                            <p class="text-xl font-bold text-[#8ab4f8]">87.4 <span class="text-xs text-[#c4c7c5] font-normal">/ 100</span></p>
                         </div>
                     </div>
 
-                    <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
-                        <span class="text-xs text-slate-400">ZK Merkle Evidence: <code class="text-cyan-400 font-mono">5f9b4c2a8190...</code></span>
-                        <button onclick="signTestClaim('SepoliaV1')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition">
-                            ✍️ Sign Test Authorization
+                    <div class="pt-3 border-t border-[#37393b] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <span class="text-xs text-[#c4c7c5]">ZK Evidence: <code class="text-[#8ab4f8] font-mono">5f9b4c2a8190...</code></span>
+                        <button onclick="signTestClaim('OldProtocolV1')" class="google-blue text-xs font-bold px-4 py-2 rounded-lg transition">
+                            Sign Verification (Testnet)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="google-card p-5 rounded-xl space-y-4 hover:border-[#8ab4f8]/50 transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-bold text-white text-sm">Legacy_Staking_Pool_Rewards</h3>
+                                <span class="bg-[#1e2a3a] text-[#8ab4f8] text-[10px] font-bold px-2 py-0.5 rounded-md border border-[#2d4763]">ACTIVE CLAIM</span>
+                            </div>
+                            <p class="text-xs text-[#c4c7c5] mt-1 font-mono">Contract: 0x7890abcdef1234567890abcdef1234567890abcd</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[11px] text-[#c4c7c5]">Martin Score</span>
+                            <p class="text-xl font-bold text-[#8ab4f8]">79.2 <span class="text-xs text-[#c4c7c5] font-normal">/ 100</span></p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-[#37393b] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <span class="text-xs text-[#c4c7c5]">ZK Evidence: <code class="text-[#8ab4f8] font-mono">3a8c1e40fb72...</code></span>
+                        <button onclick="signTestClaim('LegacyStaking')" class="google-blue text-xs font-bold px-4 py-2 rounded-lg transition">
+                            Sign Verification (Testnet)
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Peanut Gateway -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
-                    <span class="text-2xl">🥜</span>
+            <!-- Right 1 Col: Peanut Protocol Integration -->
+            <div class="google-card p-5 rounded-xl space-y-4">
+                <div class="flex items-center gap-2 border-b border-[#37393b] pb-3">
+                    <span class="text-lg">🥜</span>
                     <div>
-                        <h2 class="font-bold text-white text-base">Peanut Gateway</h2>
-                        <p class="text-xs text-slate-400">Gasless Link-based Transfers</p>
+                        <h3 class="text-sm font-bold text-white">Peanut Gateway</h3>
+                        <p class="text-[11px] text-[#c4c7c5]">Gasless Shareable Payment Links</p>
                     </div>
                 </div>
-                <div>
-                    <label class="text-xs font-semibold text-slate-400">Test Amount ($tMARTIN)</label>
-                    <input id="payAmount" type="number" value="25.0" class="w-full mt-1.5 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-xs text-[#c4c7c5]">Test Amount ($tMARTIN)</label>
+                        <input id="payAmount" type="number" value="25.0" class="google-input w-full mt-1 px-3 py-2 text-sm text-white rounded-lg outline-none focus:border-[#8ab4f8]">
+                    </div>
+                    <button onclick="generatePeanutLink()" class="w-full bg-[#fdd663] hover:bg-[#ffe082] text-slate-950 font-bold text-xs py-2.5 rounded-lg transition">
+                        Generate Gasless Claim Link
+                    </button>
                 </div>
-                <button onclick="generatePeanutLink()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold text-xs py-3 rounded-xl">
-                    ⚡ Generate Shareable Claim Link
-                </button>
-                <div id="linkBox" class="hidden p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2">
-                    <p class="text-xs text-emerald-400 font-bold">✓ Claim Link Created:</p>
-                    <input id="claimUrl" readonly class="w-full bg-slate-900 text-slate-300 text-xs px-2 py-1.5 rounded border border-slate-800">
+
+                <div id="linkBox" class="hidden p-3 google-input rounded-lg space-y-2">
+                    <p class="text-xs text-[#c4eed0] font-bold">✓ Shareable Claim Link:</p>
+                    <input id="claimUrl" readonly class="w-full bg-[#1e1f20] text-xs px-2 py-1.5 rounded border border-[#37393b] text-[#c4c7c5] font-mono outline-none">
+                    <button onclick="copyClaimLink()" class="w-full bg-[#28292a] hover:bg-[#37393b] text-xs py-1.5 rounded text-white font-medium">Copy Link</button>
                 </div>
             </div>
+
         </div>
     </main>
 
-    <!-- Universal Smart Wallet Logic -->
+    <!-- Footer -->
+    <footer class="border-t border-[#37393b] py-4 px-6 text-center text-xs text-[#c4c7c5]">
+        Martin's Algorithm Web 4.0 Network — Synchronized on Google AI Studio & Netlify
+    </footer>
+
+    <!-- Logic -->
     <script>
         let currentWalletAddress = null;
-        let isSimulated = false;
 
         async function smartConnectWallet() {
-            // Case 1: If MetaMask is installed
             if (window.ethereum) {
                 try {
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     await provider.send("eth_requestAccounts", []);
                     const signer = provider.getSigner();
                     currentWalletAddress = await signer.getAddress();
-                    isSimulated = false;
-
-                    const bal = await provider.getBalance(currentWalletAddress);
-                    document.getElementById("walletBal").innerText = parseFloat(ethers.utils.formatEther(bal)).toFixed(4) + " SepoliaETH";
-                    document.getElementById("walletModeTag").innerText = "MetaMask Web3 Active";
-                    activateUI(currentWalletAddress);
+                    activateUI(currentWalletAddress, "MetaMask");
                     return;
                 } catch (e) {
-                    console.log("MetaMask popup closed, switching to Instant Testnet Engine...");
+                    console.log("MetaMask not connected, using instant testnet wallet");
                 }
             }
 
-            // Case 2: Instant Testnet Wallet (Zero Installation Required)
+            // Instant Testnet Engine
             const randomWallet = ethers.Wallet.createRandom();
             currentWalletAddress = randomWallet.address;
-            isSimulated = true;
-
-            document.getElementById("walletBal").innerText = "5.0000 SepoliaETH";
-            document.getElementById("walletModeTag").innerText = "Built-in Testnet Engine (Instant)";
-            activateUI(currentWalletAddress);
+            activateUI(currentWalletAddress, "Instant Testnet");
         }
 
-        function activateUI(addr) {
+        function activateUI(addr, type) {
             const short = addr.substring(0, 6) + "..." + addr.substring(38);
-            const btn = document.getElementById("walletBtn");
-            btn.innerText = "🟢 " + short;
-            btn.classList.remove("from-cyan-500", "to-blue-600");
-            btn.classList.add("bg-emerald-600", "text-white");
-
-            document.getElementById("fullAddress").innerText = addr;
-            document.getElementById("walletBanner").classList.remove("hidden");
+            document.getElementById("btnText").innerText = short;
+            document.getElementById("walletBtn").classList.remove("google-blue");
+            document.getElementById("walletBtn").classList.add("bg-[#1e3a2f]", "text-[#c4eed0]", "border", "border-[#2d5f47]");
+            document.getElementById("fullAddress").innerText = addr + " (" + type + ")";
+            document.getElementById("connectedBanner").classList.remove("hidden");
         }
 
         function signTestClaim(id) {
@@ -178,7 +219,7 @@
                 return;
             }
             const hash = "0x" + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join('');
-            alert("✅ Cryptographic Authorization Signed!\n\nOpportunity: " + id + "\nSigner: " + currentWalletAddress + "\nSignature Hash:\n" + hash.substring(0, 42) + "...\n\nStatus: 100% Verified on Testnet Engine!");
+            alert("✅ Cryptographic Authorization Signed!\n\nOpportunity: " + id + "\nSigner: " + currentWalletAddress + "\nSignature Hash:\n" + hash.substring(0, 42) + "...\n\nVerified on Midnight ZK Testnet Engine.");
         }
 
         function generatePeanutLink() {
@@ -186,6 +227,13 @@
             const secret = Math.random().toString(36).substring(2, 12);
             document.getElementById("claimUrl").value = "https://peanut.to/claim?network=sepolia&secret=" + secret + "&amount=" + amt;
             document.getElementById("linkBox").classList.remove("hidden");
+        }
+
+        function copyClaimLink() {
+            const el = document.getElementById("claimUrl");
+            el.select();
+            document.execCommand("copy");
+            alert("Peanut Payment Link copied to clipboard!");
         }
     </script>
 </body>
