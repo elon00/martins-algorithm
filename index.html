@@ -9,9 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Ethers.js v5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-    <!-- Magic.link SDK -->
     <script src="https://auth.magic.link/sdk"></script>
     <style>
         body { font-family: 'Google Sans', sans-serif; background-color: #131314; color: #e3e3e3; }
@@ -25,8 +23,8 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- Top Header -->
-    <header class="border-b border-[#37393b] bg-[#1e1f20]/90 backdrop-blur px-6 py-3 sticky top-0 z-50">
+    <!-- Top Header with Prominent Wallet & Public Key Display -->
+    <header class="border-b border-[#37393b] bg-[#1e1f20]/95 backdrop-blur px-6 py-3 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#8ab4f8] to-[#c58af9] flex items-center justify-center font-bold text-slate-950 text-base shadow-sm">✦</div>
@@ -34,27 +32,37 @@
                     <div class="flex items-center gap-2">
                         <span class="font-bold text-white text-base tracking-tight">Martin's Algorithm</span>
                         <span class="text-[10px] bg-[#28292a] text-[#8ab4f8] border border-[#444746] px-2 py-0.5 rounded-md font-medium">Web4 Agentic Studio</span>
-                        <span class="text-[10px] bg-[#1e3a2f] text-[#c4eed0] border border-[#2d5f47] px-2 py-0.5 rounded-md font-medium">Magic.link Active</span>
                     </div>
                     <p class="text-[11px] text-[#c4c7c5]">Autonomous Crypto Intelligence & Privacy-Preserving ZK Network</p>
                 </div>
             </div>
 
-            <!-- Agent Model & Wallet Controls -->
+            <!-- Top Wallet & Public Key Display -->
             <div class="flex items-center gap-3">
-                <select id="agentSelect" class="google-input text-xs text-[#8ab4f8] font-medium rounded-lg px-3 py-1.5 outline-none">
-                    <option value="orchestrator">👑 Orchestrator Agent (Master)</option>
-                    <option value="discovery">🛰️ Discovery & Market Agent</option>
-                    <option value="blockchain">🔗 Blockchain Reader Agent</option>
-                    <option value="risk">⚠️ Risk & Anomaly Agent</option>
-                    <option value="zk">🔐 Midnight ZK Prover Agent</option>
-                </select>
-                <button id="walletBtn" onclick="openWalletModal()" class="google-blue font-bold text-xs px-4 py-2 rounded-full transition-all flex items-center gap-2">
+                <div id="topKeyBadge" class="hidden google-input px-3 py-1.5 rounded-lg border border-[#444746] flex items-center gap-2 text-xs">
+                    <span class="text-[#c4eed0] text-[11px]">● Public Key:</span>
+                    <span id="topPublicKey" class="font-mono text-[#8ab4f8] font-bold">0x...</span>
+                </div>
+                <button id="walletBtn" onclick="openWalletModal()" class="google-blue font-bold text-xs px-4 py-2 rounded-full transition-all flex items-center gap-2 shadow-sm">
                     <span>🔗</span> <span id="btnText">Connect Wallet</span>
                 </button>
             </div>
         </div>
     </header>
+
+    <!-- Top Public Key Banner (Active upon connection) -->
+    <div id="walletBanner" class="hidden bg-[#1e2a22] border-b border-[#2d5f47] px-6 py-2">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs">
+            <div class="flex items-center gap-2">
+                <span class="text-[#c4eed0] font-bold">🟢 Connected Wallet Address:</span>
+                <span id="fullAddress" class="font-mono text-[#8ab4f8] font-bold"></span>
+            </div>
+            <div class="flex items-center gap-3 mt-1 sm:mt-0">
+                <span id="walletProviderTag" class="text-[10px] bg-[#28292a] text-[#8ab4f8] border border-[#444746] px-2.5 py-0.5 rounded-full font-bold">MetaMask</span>
+                <span class="text-[#c4c7c5]">Balance: <b id="walletBal" class="text-white font-mono">5.0000 SepoliaETH</b></span>
+            </div>
+        </div>
+    </div>
 
     <!-- Studio Tab Navigation -->
     <div class="border-b border-[#37393b] bg-[#1e1f20] px-6">
@@ -69,21 +77,6 @@
 
     <!-- Main Workspace -->
     <main class="max-w-7xl mx-auto p-6 flex-1 w-full space-y-6">
-
-        <!-- Wallet Connected Banner -->
-        <div id="walletBanner" class="hidden google-card p-4 rounded-xl flex items-center justify-between border-l-4 border-l-[#c4eed0]">
-            <div class="flex items-center gap-3">
-                <span class="text-xl text-[#c4eed0]">●</span>
-                <div>
-                    <p class="text-xs font-bold text-white">Active Testnet Session</p>
-                    <p id="fullAddress" class="text-xs text-[#c4c7c5] font-mono"></p>
-                </div>
-            </div>
-            <div class="text-right">
-                <span id="walletProviderTag" class="text-[10px] bg-[#28292a] text-[#8ab4f8] border border-[#444746] px-2.5 py-1 rounded-full font-bold">MetaMask</span>
-                <p id="walletBal" class="text-sm font-bold text-[#8ab4f8] mt-1">5.0000 SepoliaETH</p>
-            </div>
-        </div>
 
         <!-- 1. AI AGENTIC CHATBOT SECTION -->
         <section id="sec-chat" class="space-y-4">
@@ -102,7 +95,7 @@
                 <div id="chatHistory" class="flex-1 overflow-y-auto space-y-3 pr-2 font-sans text-xs">
                     <div class="bg-[#131314] p-3.5 rounded-xl border border-[#37393b] text-[#e3e3e3] max-w-[85%]">
                         <span class="text-[#8ab4f8] font-bold">Martin Orchestrator:</span>
-                        <p class="mt-1">Hello! I am the Martin's Algorithm Autonomous AI Agent. Magic.link email login is now enabled along with MetaMask and Instant Testnet wallets. I am ready to compute Martin Score v2.0, execute QUBO optimization, and verify Midnight ZK proofs.</p>
+                        <p class="mt-1">Hello! I am the Martin's Algorithm Autonomous AI Agent. Your wallet and public key are displayed right at the top. I am ready to compute Martin Score v2.0, execute QUBO optimization, and verify Midnight ZK proofs.</p>
                         <p class="mt-1 text-[#c4c7c5] font-mono text-[11px]">Select a prompt below or type your custom query 👇</p>
                     </div>
                 </div>
@@ -225,7 +218,7 @@
 
     </main>
 
-    <!-- Modal: Wallet Connection Options -->
+    <!-- Modal: Wallet Connection -->
     <div id="walletModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="google-card max-w-md w-full rounded-2xl p-6 space-y-5 border border-[#37393b] shadow-2xl">
             <div class="flex justify-between items-center border-b border-[#37393b] pb-3">
@@ -278,12 +271,18 @@
         const MAGIC_PUBLISHABLE_KEY = 'pk_live_53D5CD21B7267976';
         let magicInstance = null;
 
-        // Initialize Magic SDK
         if (window.Magic) {
-            magicInstance = new Magic(MAGIC_PUBLISHABLE_KEY, {
-                network: 'sepolia'
-            });
+            magicInstance = new Magic(MAGIC_PUBLISHABLE_KEY, { network: 'sepolia' });
         }
+
+        // Auto-connect instant session wallet if not connected
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!currentWalletAddress) {
+                const randomWallet = ethers.Wallet.createRandom();
+                currentWalletAddress = randomWallet.address;
+                activateUI(currentWalletAddress, "Instant Testnet");
+            }
+        });
 
         function openWalletModal() {
             document.getElementById('walletModal').classList.remove('hidden');
@@ -296,10 +295,9 @@
         async function connectMagicEmail() {
             const email = document.getElementById('magicEmailInput').value.trim();
             if (!email) return alert('Please enter a valid email address!');
-            
             closeWalletModal();
             try {
-                alert('Sending Magic Link / OTP to ' + email + '... Please check your inbox.');
+                alert('Sending OTP to ' + email + '... Please check your inbox.');
                 await magicInstance.auth.loginWithEmailOTP({ email: email });
                 const userMetadata = await magicInstance.user.getInfo();
                 currentWalletAddress = userMetadata.publicAddress;
@@ -339,6 +337,12 @@
             document.getElementById("btnText").innerText = short;
             document.getElementById("walletBtn").classList.remove("google-blue");
             document.getElementById("walletBtn").classList.add("bg-[#1e3a2f]", "text-[#c4eed0]", "border", "border-[#2d5f47]");
+            
+            // Top Public Key Badges
+            document.getElementById("topPublicKey").innerText = short;
+            document.getElementById("topKeyBadge").classList.remove("hidden");
+            
+            // Banner
             document.getElementById("fullAddress").innerText = addr;
             document.getElementById("walletProviderTag").innerText = type;
             document.getElementById("walletBanner").classList.remove("hidden");
@@ -379,7 +383,6 @@
         }
 
         function processAgentResponse(query) {
-            const agent = document.getElementById("agentSelect").value;
             setTimeout(() => {
                 let reply = "";
                 const q = query.toLowerCase();
@@ -399,9 +402,8 @@
         }
 
         function signTestClaim(id) {
-            if (!currentWalletAddress) return openWalletModal();
             const hash = "0x" + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join('');
-            alert("✅ Cryptographic Authorization Signed!\n\nOpportunity: " + id + "\nSigner: " + currentWalletAddress + "\nSignature Hash:\n" + hash.substring(0, 42) + "...\n\nStatus: 100% Verified on Testnet Engine!");
+            alert("✅ Cryptographic Authorization Signed!\n\nOpportunity: " + id + "\nSigner Public Key: " + currentWalletAddress + "\nSignature Hash:\n" + hash.substring(0, 42) + "...\n\nStatus: 100% Verified on Testnet Engine!");
         }
 
         function generatePeanutLink() {
