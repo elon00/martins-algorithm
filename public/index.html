@@ -31,12 +31,13 @@
                     <div class="flex items-center gap-2">
                         <span class="font-bold text-white text-base tracking-tight">Martin's Algorithm</span>
                         <span class="text-[10px] bg-[#28292a] text-[#8ab4f8] border border-[#444746] px-2 py-0.5 rounded-md font-medium">Web4 Agentic Studio</span>
+                        <span class="text-[10px] bg-[#1e3a2f] text-[#c4eed0] border border-[#2d5f47] px-2 py-0.5 rounded-md font-medium">Netlify Synchronized</span>
                     </div>
                     <p class="text-[11px] text-[#c4c7c5]">Autonomous Crypto Intelligence & Privacy-Preserving ZK Network</p>
                 </div>
             </div>
 
-            <!-- Agent Model Selector & Wallet -->
+            <!-- Agent Selector & Wallet -->
             <div class="flex items-center gap-3">
                 <select id="agentSelect" class="google-input text-xs text-[#8ab4f8] font-medium rounded-lg px-3 py-1.5 outline-none">
                     <option value="orchestrator">👑 Orchestrator Agent (Master)</option>
@@ -69,8 +70,6 @@
         <!-- 1. AI AGENTIC CHATBOT SECTION -->
         <section id="sec-chat" class="space-y-4">
             <div class="google-card rounded-2xl p-6 flex flex-col h-[520px]">
-                
-                <!-- Chat Header -->
                 <div class="flex justify-between items-center border-b border-[#37393b] pb-3 mb-4">
                     <div class="flex items-center gap-2">
                         <span class="text-lg">🤖</span>
@@ -82,12 +81,11 @@
                     <span class="text-[11px] text-[#c4eed0] bg-[#1e3a2f] px-2.5 py-1 rounded-full border border-[#2d5f47]">● Agents Active</span>
                 </div>
 
-                <!-- Chat Messages Container -->
                 <div id="chatHistory" class="flex-1 overflow-y-auto space-y-3 pr-2 font-sans text-xs">
                     <div class="bg-[#131314] p-3.5 rounded-xl border border-[#37393b] text-[#e3e3e3] max-w-[85%]">
                         <span class="text-[#8ab4f8] font-bold">Martin Orchestrator:</span>
                         <p class="mt-1">Hello! I am the Martin's Algorithm Autonomous AI Agent. I am ready to scan the crypto ecosystem for legitimate recovery opportunities, compute Martin Score v2.0, execute QUBO quantum portfolio optimization, and verify Midnight Zero-Knowledge Merkle proofs.</p>
-                        <p class="mt-1 text-[#c4c7c5] font-mono text-[11px]">Select a quick prompt below or enter your query 👇</p>
+                        <p class="mt-1 text-[#c4c7c5] font-mono text-[11px]">Select a prompt below or type your custom query 👇</p>
                     </div>
                 </div>
 
@@ -109,12 +107,11 @@
 
                 <!-- Chat Input -->
                 <div class="flex gap-2">
-                    <input id="chatInput" type="text" placeholder="Ask Martin AI Agent (e.g., Scan 0x123..., optimize portfolio, verify ZK root)..." onkeydown="if(event.key==='Enter') sendChatMessage()" class="google-input flex-1 px-4 py-2.5 rounded-xl text-xs text-white outline-none focus:border-[#8ab4f8]">
+                    <input id="chatInput" type="text" placeholder="Ask Martin AI Agent (e.g., Scan contract, optimize portfolio, verify ZK root)..." onkeydown="if(event.key==='Enter') sendChatMessage()" class="google-input flex-1 px-4 py-2.5 rounded-xl text-xs text-white outline-none focus:border-[#8ab4f8]">
                     <button onclick="sendChatMessage()" class="google-blue font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-sm">
                         Send ➔
                     </button>
                 </div>
-
             </div>
         </section>
 
@@ -134,7 +131,7 @@
                         </div>
                     </div>
                     <p class="text-xs text-[#c4c7c5]">Signals: 17 on-chain migration events confirmed. User claimable redemption contract active.</p>
-                    <button onclick="signTestClaim('OldProtocolV1')" class="google-blue w-full font-bold text-xs py-2 rounded-lg">Sign Verification</button>
+                    <button onclick="signTestClaim('OldProtocolV1')" class="google-blue w-full font-bold text-xs py-2 rounded-lg">Sign Verification (Testnet)</button>
                 </div>
 
                 <div class="google-card p-5 rounded-2xl space-y-3">
@@ -150,7 +147,7 @@
                         </div>
                     </div>
                     <p class="text-xs text-[#c4c7c5]">Signals: Unclaimed staking rewards verified in legacy pool contract. Zero critical vulnerabilities.</p>
-                    <button onclick="signTestClaim('LegacyStaking')" class="google-blue w-full font-bold text-xs py-2 rounded-lg">Sign Verification</button>
+                    <button onclick="signTestClaim('LegacyStaking')" class="google-blue w-full font-bold text-xs py-2 rounded-lg">Sign Verification (Testnet)</button>
                 </div>
             </div>
         </section>
@@ -212,7 +209,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-[#37393b] py-3 px-6 text-center text-xs text-[#c4c7c5]">
-        Martin's Algorithm Web 4.0 Network — Multi-Agent Workspace Active
+        Martin's Algorithm Web 4.0 Network — 100% Synchronized on GitHub and Netlify
     </footer>
 
     <!-- Logic -->
@@ -238,7 +235,7 @@
                     activateUI(currentWalletAddress, "MetaMask");
                     return;
                 } catch (e) {
-                    console.log("MetaMask popup dismissed, using instant testnet wallet");
+                    console.log("MetaMask dismissed, using instant testnet wallet");
                 }
             }
             const randomWallet = ethers.Wallet.createRandom();

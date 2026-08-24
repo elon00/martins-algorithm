@@ -1,8 +1,13 @@
 ﻿[build]
   publish = "public"
-  command = "echo 'Deploying Martin Algorithm Web4 Testnet Network...'"
+  command = "echo 'Deploying Synchronized Martin Algorithm Web4 Testnet...'"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
