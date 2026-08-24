@@ -1,0 +1,17 @@
+﻿pragma language_version >= 0.1.0;
+import CompactStandardLibrary;
+
+export ledger state {
+    admin: Bytes[32],
+    execution_counter: Counter,
+    latest_evidence_root: Bytes[32]
+}
+
+witness get_witness(): { secret_salt: Bytes[32], computed_score: Uint<64> };
+
+export circuit verify_claim(expected_root: Bytes[32]): [] {
+    const w = get_witness();
+    assert(w.computed_score >= 50, "Score below threshold");
+    state.execution_counter.increment(1);
+    state.latest_evidence_root = expected_root;
+}

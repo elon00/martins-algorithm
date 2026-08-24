@@ -1,0 +1,7 @@
+﻿[build]
+  publish = "public"
+  command = "echo 'Dashboard ready'"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
