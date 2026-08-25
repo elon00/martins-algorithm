@@ -1,104 +1,162 @@
-"""Deterministic Martin scoring utilities.
+"""
+Martin Score Engine
+===================
+Implements the Martin Score formula:
 
-This module preserves the feature-based Candidate API used by the classifier,
-optimizer and tests while also exposing the newer 0-100 scoring engine.
-Scores are research heuristics, not investment recommendations.
+    M_i = alpha * S_i  +  beta * P_rec(i)  +  gamma * C_i  -  delta * Risk_i
+
+where:
+    S_i    = weighted feature score across 9 dimensions
+    P_rec  = sigmoid(recovery_logit) — estimated recovery probability
+    C_i    = confidence in the data [0, 1]
+    Risk_i = normalized risk factor [0, 1]
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from collections.abc import Mapping
+from dataclasses import dataclass, field
 from math import exp
-from typing import Any, Mapping, Optional
+from typing import Any, Optional
 
+# ---------------------------------------------------------------------------
+# Feature definitions
+# ---------------------------------------------------------------------------
+
+FEATURES: tuple[str, ...] = (
+    "market_activity",
+    "liquidity",
+    "volume",
+    "onchain_activity",
+    "developer_activity",
+    "exchange_activity",
+    "project_health",
+    "recovery_evidence",
+    "ownership_evidence",
+)
 
 DEFAULT_WEIGHTS: dict[str, float] = {
-    "market_activity": 0.15,
-    "liquidity": 0.15,
-    "volume": 0.10,
-    "onchain_activity": 0.10,
+    "market_activity":    0.12,
+    "liquidity":          0.12,
+    "volume":             0.08,
+    "onchain_activity":   0.15,
     "developer_activity": 0.10,
-    "exchange_activity": 0.05,
-    "project_health": 0.15,
-    "recovery_evidence": 0.10,
+    "exchange_activity":  0.08,
+    "project_health":     0.10,
+    "recovery_evidence":  0.15,
     "ownership_evidence": 0.10,
 }
 
+assert abs(sum(DEFAULT_WEIGHTS.values()) - 1.0) < 1e-9, "Weights must sum to 1"
+
+# ---------------------------------------------------------------------------
+# Data model
+# ---------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class Candidate:
-    """Normalized research candidate consumed by the feature scoring pipeline."""
-
+    """A crypto asset candidate for scoring."""
     asset_id: str
-    features: Mapping[str, float]
-    risk: float = 0.0
-    confidence: float = 1.0
+    features: Mapping[str, float] = field(default_factory=dict)
+    risk: float = 0.0       # [0, 1] — higher = riskier
+    confidence: float = 0.0  # [0, 1] — higher = more data available
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "risk", clamp(self.risk))
+        object.__setattr__(self, "confidence", clamp(self.confidence))
 
 
-def clamp(value: float, lower: float = 0.0, upper: float = 1.0) -> float:
+# ---------------------------------------------------------------------------
+# Math helpers
+# ---------------------------------------------------------------------------
+
+def clamp(x: float, lower: float = 0.0, upper: float = 1.0) -> float:
     """Clamp a scalar to an inclusive interval."""
-    return max(lower, min(upper, float(value)))
+    return max(lower, min(upper, float(x)))
 
 
-def sigmoid(value: float) -> float:
-    """Numerically stable logistic transform."""
-    if value >= 0:
-        z = exp(-value)
-        return 1.0 / (1.0 + z)
-    z = exp(value)
-    return z / (1.0 + z)
+def sigmoid(x: float) -> float:
+    """Numerically stable sigmoid function."""
+    if x >= 0:
+        return 1.0 / (1.0 + exp(-x))
+    e = exp(x)
+    return e / (1.0 + e)
+
+
+# ---------------------------------------------------------------------------
+# Scoring
+# ---------------------------------------------------------------------------
+
+def base_score(
+    candidate: Candidate,
+    weights: dict[str, float] = DEFAULT_WEIGHTS,
+) -> float:
+    """Compute the weighted base feature score S_i."""
+    return sum(
+        weights.get(k, 0.0) * clamp(candidate.features.get(k, 0.0))
+        for k in FEATURES
+    )
+
+
+def recovery_probability(candidate: Candidate) -> float:
+    """
+    Estimate P_rec(i) = sigma(logit) where the logit combines
+    recovery and ownership evidence minus risk.
+    """
+    rec = clamp(candidate.features.get("recovery_evidence", 0.0))
+    own = clamp(candidate.features.get("ownership_evidence", 0.0))
+    logit = 2.0 * rec + 1.5 * own - 2.0 * candidate.risk
+    return sigmoid(logit)
 
 
 def martin_score(
     candidate: Candidate,
     weights: Optional[Mapping[str, float]] = None,
+    alpha: float = 0.60,
+    beta: float = 0.25,
+    gamma: float = 0.15,
+    delta: float = 0.50,
 ) -> float:
-    """Return a deterministic research score in the inclusive range 0 to 1.
-
-    Missing features contribute zero. The score is a ranking heuristic only
-    and does not establish ownership, recoverability, value, or investment
-    return.
     """
-    selected_weights = dict(weights or DEFAULT_WEIGHTS)
-    weight_total = sum(
-        max(0.0, float(weight)) for weight in selected_weights.values()
-    )
-    if weight_total <= 0:
-        raise ValueError("scoring weights must contain a positive total weight")
+    Compute the Martin Score for a single candidate.
 
-    evidence = sum(
-        clamp(float(candidate.features.get(name, 0.0)))
-        * max(0.0, float(weight))
-        for name, weight in selected_weights.items()
-    ) / weight_total
+    M_i = alpha * S_i + beta * P_rec(i) + gamma * C_i - delta * Risk_i
 
-    confidence = clamp(candidate.confidence)
-    risk = clamp(candidate.risk)
-    confidence_adjusted = evidence * (0.5 + 0.5 * confidence)
-    return round(clamp(confidence_adjusted - 0.35 * risk), 12)
+    Returns a value in [0, 1].
+    """
+    w = dict(weights or DEFAULT_WEIGHTS)
+    s = sum(w.get(k, 0.0) * clamp(candidate.features.get(k, 0.0)) for k in FEATURES)
+    p_rec = recovery_probability(candidate)
+    c = candidate.confidence
+    risk = candidate.risk
+
+    raw = alpha * s + beta * p_rec + gamma * c - delta * risk
+    return clamp(raw)
 
 
 def rank_candidates(
     candidates: list[Candidate],
+    weights: Optional[Mapping[str, float]] = None,
     top_k: int | None = None,
 ) -> list[tuple[Candidate, float]]:
-    """Rank candidates by descending Martin score."""
-    ranked = sorted(
-        ((candidate, martin_score(candidate)) for candidate in candidates),
-        key=lambda item: item[1],
-        reverse=True,
-    )
-    if top_k is None:
-        return ranked
-    if top_k < 0:
-        raise ValueError("top_k must be non-negative")
-    return ranked[:top_k]
+    """
+    Score and rank a list of candidates, returning (candidate, score) pairs
+    sorted descending by score. Optionally limit to top_k results.
+    """
+    scored = [(c, martin_score(c, weights)) for c in candidates]
+    scored.sort(key=lambda x: x[1], reverse=True)
+    if top_k is not None:
+        scored = scored[:top_k]
+    return scored
 
+
+# ---------------------------------------------------------------------------
+# Martin Engine v2.0 Compatibility Class
+# ---------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class MartinWeights:
-    """Weights for the separate 0-100 operational score helper."""
-
+    """Configurable weights for Martin Score calculation."""
     alpha: float = 0.60
     beta: float = 0.25
     gamma: float = 0.15
@@ -112,9 +170,8 @@ class MartinScoringEngine:
     """Compute a bounded 0-100 operational research score."""
 
     def __init__(self, weights: Optional[MartinWeights] = None) -> None:
-        self.weights = (
-            weights if weights is not None else OPERATIONAL_DEFAULT_WEIGHTS
-        )
+        """Initializes scoring engine."""
+        self.weights = weights if weights is not None else OPERATIONAL_DEFAULT_WEIGHTS
         self.version = "martin-v2.0"
 
     def calculate_score(
