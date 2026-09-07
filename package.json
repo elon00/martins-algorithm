@@ -1,0 +1,32 @@
+{
+  "name": "martins-algorithm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "python tests/test_nist_pqc.py && python scripts/audit_crypto.py && python scripts/reality_universal.py && python main.py",
+    "test:nist": "python tests/test_nist_pqc.py",
+    "audit:crypto": "python scripts/audit_crypto.py",
+    "reality:universal": "python scripts/reality_universal.py",
+    "reality:certify": "python scripts/generate_urs_certificate.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elon00/martins-algorithm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/elon00/martins-algorithm/issues"
+  },
+  "homepage": "https://github.com/elon00/martins-algorithm#readme",
+  "dependencies": {
+    "@noble/hashes": "^1.8.0",
+    "@noble/post-quantum": "^0.7.1"
+  }
+}

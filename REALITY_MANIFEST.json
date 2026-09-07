@@ -1,0 +1,54 @@
+{
+  "system": "MartinsAlgorithm",
+  "version": "1.0.0",
+  "status": "EVIDENCE_BASED_PQC_PROTOCOL",
+  "description": "Autonomous Crypto Asset Recovery & Opportunity Detection Engine powered by Simulated Quantum Annealing (SQA), NIST FIPS 203 ML-KEM-768, and NIST FIPS 204 ML-DSA-65",
+  "truthTaxonomy": {
+    "quantumLayer": "SIMULATED_QUANTUM_ANNEALING_SQA_QUBO",
+    "cryptographicCore": "NIST_FIPS_203_204_LATTICE_CONJUNCTION",
+    "kemScheme": "NIST_FIPS_203_ML_KEM_768",
+    "signatureScheme": "NIST_FIPS_204_ML_DSA_65",
+    "simulationEliminated": true,
+    "weakestLinkGate": "H=0.60 (Pending external 3rd-party audit)",
+    "auditFirmStatus": "PENDING_EXTERNAL_AUDIT"
+  },
+  "subsystems": [
+    {
+      "name": "QUBOOptimizer",
+      "path": "quantum/qubo_optimizer.py",
+      "status": "VERIFIED_SQA_SUZUKI_TROTTER",
+      "properties": {
+        "trotterReplicas": 8,
+        "annealingSchedule": "Transverse Gamma(t) Monte Carlo"
+      }
+    },
+    {
+      "name": "PQCEngine",
+      "path": "security/pqc_engine.py",
+      "status": "VERIFIED_NIST_FIPS_203_204",
+      "wire": {
+        "kemPublicKeyBytes": 1184,
+        "kemSecretKeyBytes": 2400,
+        "kemCiphertextBytes": 1088,
+        "kemSharedSecretBytes": 32,
+        "dsaPublicKeyBytes": 1952,
+        "dsaSecretKeyBytes": 4032,
+        "dsaSignatureBytes": 3309
+      }
+    },
+    {
+      "name": "PolicyEngine",
+      "path": "security/policy_engine.py",
+      "status": "VERIFIED_DUAL_HYBRID_CONJUNCTION",
+      "properties": {
+        "failClosed": true,
+        "securityThreshold": 50.0
+      }
+    },
+    {
+      "name": "EvidenceEngine",
+      "path": "martin_core/evidence.py",
+      "status": "VERIFIED_ZK_COMMITMENT"
+    }
+  ]
+}

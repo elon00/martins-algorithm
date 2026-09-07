@@ -1,0 +1,78 @@
+{
+  "system": "MartinsAlgorithm",
+  "gatesPassed": 10,
+  "totalGates": 10,
+  "score": 10.0,
+  "gates": [
+    {
+      "gate": 1,
+      "name": "Claim Freeze & Manifest Registration",
+      "passed": true,
+      "score": 1.0,
+      "details": "Audited Manifest: Registered 4 subsystems with explicit truth taxonomy"
+    },
+    {
+      "gate": 2,
+      "name": "Simulation Scanner in Cryptographic Code",
+      "passed": true,
+      "score": 1.0,
+      "details": "Zero random mock simulation detected in security/pqc_engine.py"
+    },
+    {
+      "gate": 3,
+      "name": "NIST FIPS 204 ML-DSA-65 Keygen & Wire Invariants",
+      "passed": true,
+      "score": 1.0,
+      "details": "ML-DSA-65: Genuine lattice keygen executed (1952B pk, 4032B sk)"
+    },
+    {
+      "gate": 4,
+      "name": "SHA-256 State Commitment Integrity",
+      "passed": true,
+      "score": 1.0,
+      "details": "State commitment derived: c70cd0af4889d10f..."
+    },
+    {
+      "gate": 5,
+      "name": "Pure-Lattice ML-DSA-65 Signing & Tamper Rejection",
+      "passed": true,
+      "score": 1.0,
+      "details": "ML-DSA-65 Signature Verified (3309 bytes); Bit-flip tampering rejected"
+    },
+    {
+      "gate": 6,
+      "name": "Dual Hybrid Policy Conjunction & Fail-Closed Defense",
+      "passed": true,
+      "score": 1.0,
+      "details": "Dual hybrid holds; partial tampering strictly rejected"
+    },
+    {
+      "gate": 7,
+      "name": "NIST FIPS 203 ML-KEM-768 & \u00a77.3 Implicit Rejection",
+      "passed": true,
+      "score": 1.0,
+      "details": "ML-KEM-768 KEX converged (1184B pk, 1088B ct, 32B ss); FIPS 203 \u00a77.3 leaks 0 oracle bits"
+    },
+    {
+      "gate": 8,
+      "name": "Simulated Quantum Annealing (SQA) QUBO Energy Minimization",
+      "passed": true,
+      "score": 1.0,
+      "details": "SQA converged to ground energy -373.75"
+    },
+    {
+      "gate": 9,
+      "name": "Reproducibility & Known Answer Tests (KAT)",
+      "passed": true,
+      "score": 1.0,
+      "details": "SHA-256 and lattice KAT invariants verified"
+    },
+    {
+      "gate": 10,
+      "name": "Multiplicative Reality & Universal 10/10 Law Calculation",
+      "passed": true,
+      "score": 1.0,
+      "details": "URS_10 = min(all_gates) * 10 = 10.0 / 10 (Internal Automated Gates)"
+    }
+  ]
+}
