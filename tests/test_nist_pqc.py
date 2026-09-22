@@ -1,5 +1,5 @@
 """
-Martin's Algorithm // Official NIST & Wycheproof Test Suite
+Martin's Algorithm // PQC Integration & Adversarial Test Suite
 Verifies:
 1. RFC 5869 HKDF-SHA256 Known Answer Test
 2. SHA-256 Canonical State Commitments
@@ -7,7 +7,7 @@ Verifies:
 4. NIST FIPS 203 §7.3 Implicit Rejection
 5. NIST FIPS 204 ML-DSA-65 Wire Invariants
 6. NIST FIPS 204 ML-DSA-65 Genuine Signature
-7. Wycheproof Negative & Adversarial Bit-Flip Tests
+7. Adversarial negative and bit-flip tests
 8. Dual Hybrid Policy Authorization Conjunction
 """
 
@@ -24,7 +24,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 from security.pqc_engine import PQCEngine
 from quantum.qubo_optimizer import QUBOOptimizer
 
-class TestNISTAndWycheproof(unittest.TestCase):
+class TestPQCAndAdversarial(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pqc = PQCEngine()
@@ -93,7 +93,7 @@ class TestNISTAndWycheproof(unittest.TestCase):
         self.assertTrue(is_valid, "Genuine signature must verify")
 
     def test_07_wycheproof_adversarial_tampering(self):
-        """Tier 7: Wycheproof Negative & Adversarial Tests"""
+        """Tier 7: Adversarial negative tests"""
         pk, sk = self.pqc.generate_dsa_keypair()
         msg = "Martin's Algorithm Security Test"
         sig = self.pqc.sign_dsa(msg, sk)
