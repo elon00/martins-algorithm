@@ -88,6 +88,16 @@ See [SECURITY.md](SECURITY.md).
 
 Never commit private keys, seed phrases, API tokens, wallet credentials, or user asset data. Any future execution layer should require explicit authorization, transaction simulation, policy limits, signing separation, audit logging, and human approval by default.
 
+## API deployment safety
+
+The FastAPI service is open for local development but fails closed in production:
+
+- set `MARTIN_ENV=production`;
+- configure `MARTIN_API_TOKEN` with a non-placeholder secret of at least 32 characters;
+- configure `MARTIN_CORS_ALLOWED_ORIGINS` for browser clients;
+- all non-public API routes require `Authorization: Bearer <MARTIN_API_TOKEN>`;
+- the API remains decision-support only and does not expose an asset-movement endpoint.
+
 ## Production boundary
 
 Before describing this system as production-ready, require at minimum:

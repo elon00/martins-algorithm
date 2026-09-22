@@ -5,7 +5,7 @@ build-backend = "setuptools.backends.legacy:build"
 [project]
 name = "martins-algorithm"
 version = "1.0.0"
-description = "Crypto Asset Recovery & Opportunity Detection Engine"
+description = "Research decision-support software for crypto-asset scoring, optimization and recovery-opportunity analysis"
 requires-python = ">=3.11"
 
 [tool.setuptools.packages.find]

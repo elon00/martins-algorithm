@@ -10,11 +10,14 @@ Run:
 
 from __future__ import annotations
 
+import os
+import secrets
 import time
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from data.coinmarketcap import CoinMarketCapAdapter
 from martin_core.classifier import classify
@@ -57,6 +60,20 @@ async def lifespan(app: FastAPI):
 # App factory
 # ---------------------------------------------------------------------------
 
+PRODUCTION = os.getenv("MARTIN_ENV", "development").lower() == "production"
+API_TOKEN = os.getenv("MARTIN_API_TOKEN", "").strip()
+CORS_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv("MARTIN_CORS_ALLOWED_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
+if PRODUCTION and (len(API_TOKEN) < 32 or API_TOKEN.lower().startswith("change_me")):
+    raise RuntimeError(
+        "MARTIN_API_TOKEN must be a non-placeholder secret of at least 32 characters in production"
+    )
+
+
 app = FastAPI(
     title="Martin's Algorithm API",
     description=(
@@ -71,10 +88,22 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=CORS_ORIGINS if PRODUCTION else (CORS_ORIGINS or ["http://localhost:3000", "http://localhost:8000"]),
+    allow_methods=["GET", "POST"],
+    allow_headers=["Authorization", "Content-Type"],
 )
+
+PUBLIC_PATHS = {"/health", "/docs", "/redoc", "/openapi.json"}
+
+
+@app.middleware("http")
+async def production_auth(request: Request, call_next):
+    if PRODUCTION and request.url.path not in PUBLIC_PATHS:
+        authorization = request.headers.get("authorization", "")
+        expected = f"Bearer {API_TOKEN}"
+        if not secrets.compare_digest(authorization, expected):
+            return JSONResponse(status_code=401, content={"detail": "unauthorized"})
+    return await call_next(request)
 
 
 # ---------------------------------------------------------------------------
@@ -102,6 +131,8 @@ def health():
         "status": "ok",
         "service": "martin-algorithm",
         "version": "1.0.0",
+        "mode": "production" if PRODUCTION else "development",
+        "execution": "decision-support only; no asset movement endpoint",
         "uptime_seconds": round(uptime, 1),
     }
 
