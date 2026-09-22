@@ -1,54 +1,38 @@
 {
   "system": "MartinsAlgorithm",
-  "version": "1.0.0",
-  "status": "EVIDENCE_BASED_PQC_PROTOCOL",
-  "description": "Autonomous Crypto Asset Recovery & Opportunity Detection Engine powered by Simulated Quantum Annealing (SQA), NIST FIPS 203 ML-KEM-768, and NIST FIPS 204 ML-DSA-65",
+  "version": "1.1.0",
+  "status": "RESEARCH_PROTOTYPE",
+  "description": "Human-gated crypto-asset opportunity scoring research with simulated quantum annealing and application-layer ML-KEM/ML-DSA integration.",
   "truthTaxonomy": {
     "quantumLayer": "SIMULATED_QUANTUM_ANNEALING_SQA_QUBO",
-    "cryptographicCore": "NIST_FIPS_203_204_LATTICE_CONJUNCTION",
-    "kemScheme": "NIST_FIPS_203_ML_KEM_768",
-    "signatureScheme": "NIST_FIPS_204_ML_DSA_65",
-    "simulationEliminated": true,
-    "weakestLinkGate": "H=0.60 (Pending external 3rd-party audit)",
-    "auditFirmStatus": "PENDING_EXTERNAL_AUDIT"
+    "cryptographicCore": "APPLICATION_LAYER_ML_KEM_768_AND_ML_DSA_65",
+    "independentAudit": false,
+    "productionCertified": false,
+    "autonomousAssetExecution": false,
+    "humanApprovalDefault": true,
+    "automaticTransactionValueDefault": 0
   },
   "subsystems": [
     {
       "name": "QUBOOptimizer",
       "path": "quantum/qubo_optimizer.py",
-      "status": "VERIFIED_SQA_SUZUKI_TROTTER",
-      "properties": {
-        "trotterReplicas": 8,
-        "annealingSchedule": "Transverse Gamma(t) Monte Carlo"
-      }
+      "status": "RESEARCH_TESTED_SQA"
     },
     {
       "name": "PQCEngine",
       "path": "security/pqc_engine.py",
-      "status": "VERIFIED_NIST_FIPS_203_204",
-      "wire": {
-        "kemPublicKeyBytes": 1184,
-        "kemSecretKeyBytes": 2400,
-        "kemCiphertextBytes": 1088,
-        "kemSharedSecretBytes": 32,
-        "dsaPublicKeyBytes": 1952,
-        "dsaSecretKeyBytes": 4032,
-        "dsaSignatureBytes": 3309
-      }
+      "status": "APPLICATION_LAYER_INTEGRATION_TESTED_NOT_FIPS_VALIDATED"
     },
     {
       "name": "PolicyEngine",
       "path": "security/policy_engine.py",
-      "status": "VERIFIED_DUAL_HYBRID_CONJUNCTION",
-      "properties": {
-        "failClosed": true,
-        "securityThreshold": 50.0
-      }
+      "status": "REPOSITORY_TESTED_FAIL_CLOSED_POLICY"
     },
     {
       "name": "EvidenceEngine",
       "path": "martin_core/evidence.py",
-      "status": "VERIFIED_ZK_COMMITMENT"
+      "status": "HASH_COMMITMENT_IMPLEMENTATION",
+      "note": "Hash commitments are not described as zero-knowledge proofs."
     }
   ]
 }
