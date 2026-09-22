@@ -7,7 +7,7 @@ Verifies 23 Invariants across:
 - NIST FIPS 203 ML-KEM-768 Lattice Keygen, Encapsulation, Decapsulation
 - NIST FIPS 203 §7.3 Implicit Rejection
 - NIST FIPS 204 ML-DSA-65 Wire Invariants & Deterministic Keygen
-- Wycheproof Bit-Flip Tampering & Negative Attacks
+- Adversarial bit-flip tampering & negative tests
 - Dual Hybrid Conjunction Conformance
 """
 
@@ -95,18 +95,18 @@ check(len(sig) // 2 == 3309, "ML-DSA-65 signature exact 3,309 bytes")
 sig_valid = pqc.verify_dsa(sig, msg, pk_dsa)
 check(sig_valid is True, "ML-DSA-65 genuine signature verified successfully")
 
-print("\n▶ [TIER 6] Wycheproof Negative & Adversarial Tests:")
+print("\n▶ [TIER 6] Adversarial Negative Tests:")
 tampered_sig = bytearray.fromhex(sig)
 tampered_sig[100] ^= 0x01
-check(pqc.verify_dsa(tampered_sig.hex(), msg, pk_dsa) is False, "Wycheproof: Bit-flipped signature rejected cleanly")
+check(pqc.verify_dsa(tampered_sig.hex(), msg, pk_dsa) is False, "Bit-flipped signature rejected cleanly")
 
-check(pqc.verify_dsa(sig, msg + "!", pk_dsa) is False, "Wycheproof: Altered message rejected cleanly")
+check(pqc.verify_dsa(sig, msg + "!", pk_dsa) is False, "Altered message rejected cleanly")
 
 short_sig = sig[:3000]
-check(pqc.verify_dsa(short_sig, msg, pk_dsa) is False, "Wycheproof: Truncated signature rejected cleanly")
+check(pqc.verify_dsa(short_sig, msg, pk_dsa) is False, "Truncated signature rejected cleanly")
 
 bad_pk = pk_dsa[:2000]
-check(pqc.verify_dsa(sig, msg, bad_pk) is False, "Wycheproof: Malformed public key size rejected cleanly")
+check(pqc.verify_dsa(sig, msg, bad_pk) is False, "Malformed public key size rejected cleanly")
 
 print("\n▶ [TIER 7] Dual Hybrid Conjunction Conformance:")
 check(pqc.verify_hybrid_authorization(msg, True, sig, pk_dsa) is True, "Dual hybrid conjunction holds when both pass")
