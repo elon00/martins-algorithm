@@ -1,15 +1,14 @@
-﻿"""Automated Self-Healing & Code Hygiene Utility."""
+﻿"""Local Code Formatting Utility."""
 import subprocess
-import sys
 
 def auto_heal():
-    print("🩹 Running Self-Healing Auto-Correction...")
+    print("Running local code formatting...")
     try:
         subprocess.run(["ruff", "check", "--fix", "."], check=False)
         subprocess.run(["ruff", "format", "."], check=False)
-        print("✓ Codebase auto-corrected and formatted successfully.")
-    except Exception as e:
-        print(f"Notice: Ruff runner: {e}")
+        print("Code formatting commands completed. Review changes before committing.")
+    except OSError as e:
+        print(f"Ruff could not be executed: {e}")
 
 if __name__ == "__main__":
     auto_heal()
