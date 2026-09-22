@@ -73,7 +73,7 @@ def run():
     print(f"[🛡️] PQC Scheme:           NIST FIPS 204 ML-DSA-65 (1952B pk, 3309B sig)")
     print(f"[✅] Policy Gate:          {decision['action']}")
     print(f"[📜] Security Status:      {decision['reason']}")
-    print("\n🚀 SYSTEM 100% OPERATIONAL & REALITY CERTIFIED!\n")
+    print("\nRESEARCH PROTOTYPE PIPELINE COMPLETED. Internal checks are not production certification.\n")
 
 if __name__ == "__main__":
     run()
