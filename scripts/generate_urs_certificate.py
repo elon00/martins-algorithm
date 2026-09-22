@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Martin's Algorithm // URS Evidence Certificate Generator
+Martin's Algorithm // Internal Evidence Report Generator
 Runs the complete 4-tier preflight verification, computes the Master Reality Hash,
 and signs the certificate using NIST FIPS 204 ML-DSA-65.
 """
@@ -19,7 +19,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 from security.pqc_engine import PQCEngine
 
 print("╔══════════════════════════════════════════════════════════════════════════╗")
-print("║       MARTIN'S ALGORITHM — GENERATING URS EVIDENCE CERTIFICATE           ║")
+print("║       MARTIN'S ALGORITHM — GENERATING INTERNAL EVIDENCE REPORT           ║")
 print("╚══════════════════════════════════════════════════════════════════════════╝\n")
 
 def run(cmd, title):
@@ -31,8 +31,8 @@ def run(cmd, title):
         sys.exit(1)
     print(f"  ✅ {title}: PASSED\n")
 
-# 1. NIST & Wycheproof Test Suite
-run("python tests/test_nist_pqc.py", "[1/4] Running Official NIST & Wycheproof Test Suite")
+# 1. PQC integration and adversarial test suite
+run("python tests/test_nist_pqc.py", "[1/4] Running PQC Integration & Adversarial Test Suite")
 
 # 2. Standalone Cryptographic Auditor
 run("python scripts/audit_crypto.py", "[2/4] Running Standalone Cryptographic Auditor")
@@ -63,17 +63,17 @@ certificate_payload = {
         "E_ExecutionReality": 1.0,
         "I_InputReality": 1.0,
         "O_OutputImpact": 1.0,
-        "V_IndependentVerification": 1.0,
+        "V_IndependentVerification": 0.0,
         "R_Reproducibility": 1.0,
         "C_ClaimHonesty": 1.0,
         "P_Provenance": 1.0,
         "F_FailClosedSafety": 1.0,
         "A_AdversarialSecurity": 1.0,
-        "H_ExternalAudit": 0.6
+        "H_ExternalAudit": 0.0
     },
-    "weakestLinkScore": 6.0,
-    "cumulativeAverage": 9.6,
-    "status": "EVIDENCE_BASED_PQC_PROTOCOL",
+    "weakestLinkScore": 0.0,
+    "cumulativeAverage": 8.0,
+    "status": "INTERNAL_RESEARCH_EVIDENCE",
     "certificationAuthority": {
         "scheme": "ML-DSA-65",
         "publicKeyHex": ca_pk
@@ -105,20 +105,20 @@ markdown_summary = f"""# 🛡️ Martin's Algorithm — Universal Reality Eviden
 
 ---
 
-## 🔬 Evidence Scores Across 10 Reality Dimensions
+## Internal Evidence Dimensions
 
 | Dimension | Metric | Score | Proof Method |
 |:---|:---|:---:|:---|
 | **E** | Execution Reality | **1.0 / 1.0** | Real SQA QUBO optimization and ML-DSA-65 signing executed |
 | **I** | Input / Data Reality | **1.0 / 1.0** | Valid risk covariance matrices and NIST ACVP test vectors |
 | **O** | Output Real Impact | **1.0 / 1.0** | Working ground-state opportunity selection & digital signatures |
-| **V** | Independent Verification | **1.0 / 1.0** | Standalone 25-assertion auditor passing independently |
+| **V** | Independent Verification | **0.0 / 1.0** | No independent third-party verification is claimed |
 | **R** | Reproducibility | **1.0 / 1.0** | Exact Suzuki-Trotter Hamiltonian & FIPS 203/204 verification |
 | **C** | Claim Honesty | **1.0 / 1.0** | Strict separation of simulated annealing vs physical QPU |
 | **P** | Provenance | **1.0 / 1.0** | Direct lineage from Path-Integral Monte Carlo & FIPS 204 |
 | **F** | Fail-Closed Safety | **1.0 / 1.0** | Dual hybrid conjunction aborts on any signature tampering |
-| **A** | Adversarial Security | **1.0 / 1.0** | Wycheproof bit-flip attack vectors strictly rejected |
-| **H** | External Audit | **0.6 / 1.0** | Pending external third-party security firm engagement |
+| **A** | Adversarial Security | **1.0 / 1.0** | Repository-defined bit-flip and tamper tests rejected |
+| **H** | External Audit | **0.0 / 1.0** | No external third-party audit is claimed |
 
 ---
 
@@ -133,11 +133,11 @@ with open('docs/reality/URS_EVIDENCE_CERTIFICATE.md', 'w', encoding='utf-8') as 
     f.write(markdown_summary)
 
 print("══════════════════════════════════════════════════════════════════════════")
-print("🏆 MARTIN'S ALGORITHM — URS EVIDENCE CERTIFICATE GENERATED")
+print("MARTIN'S ALGORITHM — INTERNAL EVIDENCE REPORT GENERATED")
 print("══════════════════════════════════════════════════════════════════════════")
-print(f"  Multiplicative Feature Reality:    1.0 / 1.0 (VERIFIED)")
-print(f"  Universal Weakest-Link (URS_10):   6.0 / 10 (Bottleneck: H = 0.6)")
-print(f"  Cumulative Dimension Average:      9.6 / 10")
+print("  Repository feature checks:         completed")
+print("  Independent verification:          NOT CLAIMED")
+print("  External security audit:           NOT CLAIMED")
 print(f"  Master Reality Hash (SHA-256):     {master_hash}")
-print(f"  JSON Certificate:                  reality/URS_EVIDENCE_CERTIFICATE.json")
+print("  JSON report:                       reality/URS_EVIDENCE_CERTIFICATE.json")
 print("══════════════════════════════════════════════════════════════════════════\n")
