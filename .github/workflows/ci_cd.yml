@@ -1,34 +1,70 @@
-﻿name: Martin Web4 CI/CD Pipeline
+name: Martin Algorithm CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  test_and_verify:
+  verify:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 20
     steps:
-    - name: 📥 Checkout Repository
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: 🐍 Set up Python 3.11
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
 
-    - name: 📦 Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install ruff pytest numpy web3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-    - name: 🔍 Lint with ruff (Self-Healing)
-      run: |
-        ruff check --fix . || true
-        ruff format . || true
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt -r requirements-dev.txt
 
-    - name: 🧪 Run Master Pipeline
-      run: |
-        python main.py
+      - name: Install locked Node dependencies
+        run: npm ci
+
+      - name: Ruff lint
+        run: ruff check .
+
+      - name: Python tests
+        run: pytest
+
+      - name: Cryptographic integration tests
+        run: |
+          python tests/test_nist_pqc.py
+          python scripts/audit_crypto.py
+
+      - name: Internal reality checks
+        run: python scripts/reality_universal.py
+
+      - name: Prototype pipeline smoke test
+        run: python main.py
+
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: python -m pip install pip-audit
+      - name: Python dependency audit
+        run: pip-audit -r requirements.txt
+      - run: npm ci --ignore-scripts
+      - name: Node production dependency audit
+        run: npm audit --omit=dev --audit-level=high
