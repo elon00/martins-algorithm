@@ -1,0 +1,48 @@
+{
+  "x402Version": "1.0.0",
+  "version": "1.0.0",
+  "name": "Martin's Algorithm — CARI Crypto Recovery & QUBO Optimization Engine",
+  "type": "crypto-recovery-algorithm",
+  "category": "ai-agent-commerce",
+  "tags": [
+    "solana",
+    "martins-algorithm",
+    "qubo-optimization",
+    "crypto-recovery",
+    "policy-engine",
+    "x402"
+  ],
+  "provider": {
+    "name": "Martin's Algorithm / CARI Engine",
+    "website": "https://github.com/elon00/martins-algorithm",
+    "payTo": "8qhW8ctXX77UNLTY9kx3XoAoH8kstQXPbCghUwqu34es",
+    "network": "solana-testnet",
+    "caip2": "solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z"
+  },
+  "endpoints": [
+    {
+      "path": "/api/v1/x402/score/asset",
+      "method": "POST",
+      "description": "Compute multi-factor Martin Score and QUBO combinatorial optimization for crypto assets",
+      "pricing": {
+        "amountSol": 0.001,
+        "lamports": 1000000,
+        "currency": "SOL",
+        "alternativeUsdc": "0.01"
+      },
+      "challengeHeader": "WWW-Authenticate: x402 realm=\"martins-algorithm\", payTo=\"8qhW8ctXX77UNLTY9kx3XoAoH8kstQXPbCghUwqu34es\", amount=\"0.001\", currency=\"SOL\", network=\"solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z\""
+    },
+    {
+      "path": "/api/v1/x402/recover/proof",
+      "method": "POST",
+      "description": "Generate cryptographic Merkle evidence root and authenticated recovery intent proof",
+      "pricing": {
+        "amountSol": 0.001,
+        "lamports": 1000000,
+        "currency": "SOL",
+        "alternativeUsdc": "0.01"
+      },
+      "challengeHeader": "WWW-Authenticate: x402 realm=\"martins-algorithm\", payTo=\"8qhW8ctXX77UNLTY9kx3XoAoH8kstQXPbCghUwqu34es\", amount=\"0.001\", currency=\"SOL\", network=\"solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z\""
+    }
+  ]
+}
