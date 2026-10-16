@@ -15,7 +15,7 @@ import secrets
 import time
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
