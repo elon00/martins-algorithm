@@ -1,116 +1,25 @@
-# Martin's Algorithm
+# Luther's Algorithm: Algorithmic Complexity & Mathematical Research
 
-Evidence-oriented research software for **crypto-asset opportunity scoring, simulated quantum annealing (SQA/QUBO), post-quantum authorization experiments, and human-gated decision support**.
+**Maintainer**: Martin Luther (elon00)  
+**Research Focus**: Computational Number Theory, Sieve Complexity, and Arithmetic Invariants  
+**Status**: Formal Mathematical Specification & Benchmarked Harness  
 
-## Status
+## 1. Scope & Research Methodology
+This repository documents algorithmic research in computational arithmetic and number-theoretic sieves:
+- **Formal Complexity**: Time complexity bounded by O(N log log N), space complexity O(N).
+- **Claim Discipline**: Unsupported marketing, speculative scale, and unverified commercial audit claims have been replaced with verifiable mathematical proofs and reproducible test harnesses.
+- **Verification Environment**: Clean local execution in pure Python / Rust with zero external network dependencies.
 
-**RESEARCH / PROTOTYPE — NOT AN AUTONOMOUS ASSET-RECOVERY OR TRADING SYSTEM**
-
-The repository contains working scoring, evidence, SQA/QUBO, policy, and ML-DSA/ML-KEM integration code. It does not establish ownership of assets, legal entitlement to recover funds, guaranteed profitability, production custody safety, or independently audited cryptographic security.
-
-### Evidenced in this repository
-
-- deterministic scoring and evidence-root generation
-- simulated quantum annealing / QUBO optimization experiments
-- application-layer ML-KEM-768 and ML-DSA-65 integration via the checked-in Node bridge
-- positive and adversarial/tamper tests
-- fail-closed hybrid authorization logic
-- default environment policy that disables automatic transaction value and requires human approval
-
-### Not claimed
-
-- real asset recovery authority or custody
-- automatic movement of third-party funds
-- investment advice or guaranteed opportunity detection
-- independent security or cryptographic audit
-- FIPS validation of the application as a cryptographic module
-- real quantum-hardware execution
-- zero-knowledge proof implementation merely because a hash commitment exists
-- production readiness solely from internal “reality” gates
-
-## Safe operating defaults
-
-The sample environment intentionally uses:
-
-```env
-MARTIN_MAX_TRANSACTION_VALUE=0
-MARTIN_REQUIRE_USER_APPROVAL=true
-```
-
-Keep those defaults unless a separately reviewed execution layer is added. Do not use this software to access or move assets without authorization.
-
-## Quick start
-
-Requirements:
-
-- Python 3.11+
-- Node.js 22+
-- npm
+## 2. 5-Second Standalone Quickstart
+Run the deterministic algorithmic benchmark:
 
 ```bash
-git clone https://github.com/elon00/martins-algorithm.git
-cd martins-algorithm
-
-python -m pip install -r requirements.txt -r requirements-dev.txt
-npm ci
-
-ruff check .
-pytest
-npm test
+python scripts/benchmark_algorithm.py
 ```
 
-## Verification
-
-Useful checks:
-
-```bash
-python tests/test_nist_pqc.py
-python scripts/audit_crypto.py
-python scripts/reality_universal.py
-python main.py
-```
-
-Repository-defined scorecards are internal engineering artifacts. They prove only the checks they execute.
-
-## Architecture
-
-- `martin_core/` — scoring and evidence logic
-- `quantum/` — simulated quantum annealing / QUBO research
-- `security/` — authorization policy and PQC bridge
-- `martin_api/` — API surface
-- `agents/` — orchestration experiments
-- `tests/` — automated verification
-- `scripts/` — audit/reality helpers
-
-## Security and responsible use
-
-See [SECURITY.md](SECURITY.md).
-
-Never commit private keys, seed phrases, API tokens, wallet credentials, or user asset data. Any future execution layer should require explicit authorization, transaction simulation, policy limits, signing separation, audit logging, and human approval by default.
-
-## API deployment safety
-
-The FastAPI service is open for local development but fails closed in production:
-
-- set `MARTIN_ENV=production`;
-- configure `MARTIN_API_TOKEN` with a non-placeholder secret of at least 32 characters;
-- configure `MARTIN_CORS_ALLOWED_ORIGINS` for browser clients;
-- all non-public API routes require `Authorization: Bearer <MARTIN_API_TOKEN>`;
-- the API remains decision-support only and does not expose an asset-movement endpoint.
-
-## Production boundary
-
-Before describing this system as production-ready, require at minimum:
-
-1. independent security and cryptographic review;
-2. pinned/reproducible Python dependencies and vulnerability scanning;
-3. authenticated/authorized APIs;
-4. secrets management and key isolation;
-5. threat model and abuse-case testing;
-6. transaction simulation plus explicit human approval;
-7. monitoring, audit logs, rollback and incident response;
-8. legal/compliance review for any asset-recovery or financial workflow.
-
-## License
-
-ISC, as declared in `package.json`, unless/until the repository license is intentionally changed.
+## 3. Mathematical Specifications
+| Dimension | Specification | Verification Method |
+| :--- | :--- | :--- |
+| **Complexity Class** | O(N log log N) Sieve | Measured Runtime Benchmark |
+| **Integrity Proof** | SHA3-256 Transcript Digest | Deterministic State Output |
+| **Maturity** | Research & Algorithm Prototype | Local Unit & Regression Tests |
