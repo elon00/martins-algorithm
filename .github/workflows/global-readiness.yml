@@ -73,7 +73,7 @@ jobs:
     if: ${{ hashFiles('package.json', 'foundry.toml', 'Anchor.toml') != '' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         if: ${{ hashFiles('package.json') != '' }}
         with:
           node-version: "20"
