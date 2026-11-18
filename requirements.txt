@@ -1,4 +1,4 @@
 numpy>=1.24,<3
-web3>=6,<8
+web3>=8.0.0,<9
 fastapi>=0.115,<1
 uvicorn[standard]>=0.30,<1
