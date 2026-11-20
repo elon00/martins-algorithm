@@ -25,7 +25,7 @@ jobs:
     name: Secret & Hygiene Gate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Verify no raw sensitive files committed
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ hashFiles('requirements.txt', 'pyproject.toml') != '' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ hashFiles('Cargo.toml', 'program/Cargo.toml') != '' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - name: Cargo Check & Test
         run: |
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ hashFiles('package.json', 'foundry.toml', 'Anchor.toml') != '' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         if: ${{ hashFiles('package.json') != '' }}
         with:
