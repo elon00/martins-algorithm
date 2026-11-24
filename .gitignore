@@ -43,3 +43,6 @@ data/cache/
 
 # Node (dashboard dev)
 node_modules/
+
+# Lean 4 build artifacts
+lean_verify/.lake/
